@@ -1,12 +1,3 @@
-# VentanaToken
-
-Source file [../../contracts/VentanaToken.sol](../../contracts/VentanaToken.sol).
-
-<br />
-
-<hr />
-
-```javascript
 /*
 file:   VentanaToken.sol
 ver:    0.0.8
@@ -704,4 +695,3 @@ contract VeredictumTest is Notify
         return true;
     }
 }
-```

@@ -1,7 +1,7 @@
 IPCFILE=ipc:./testchain/geth.ipc
 PASSWORD=testtest
 
-CONTRACTSDIR=../contracts
+CONTRACTSDIR=../../contracts
 
 TOKENSOL=VentanaToken.sol
 TOKENTEMPSOL=VentanaToken.sol
