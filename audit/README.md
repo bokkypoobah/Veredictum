@@ -6,6 +6,12 @@ Commit [10ddcc98](https://github.com/o0ragman0o/Veredictum/tree/10ddcc98ede5696e
 
 <br />
 
+## Recommendation
+
+* *MEDIUM IMPORTANCE* Add a token `name()`
+
+<br />
+
 ## Code Review
 
 * [ ] [code-review/VentanaToken.md](code-review/VentanaToken.md)
