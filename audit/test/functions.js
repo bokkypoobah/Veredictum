@@ -194,68 +194,60 @@ function failIfGasEqualsGasUsedOrContractAddressNull(contractAddress, tx, msg) {
 
 
 //-----------------------------------------------------------------------------
-// Dct Contract
+// Token Contract
 //-----------------------------------------------------------------------------
-var dctContractAddress = null;
-var dctContractAbi = null;
-
-function addDctContractAddressAndAbi(address, abi) {
-  dctContractAddress = address;
-  dctContractAbi = abi;
-}
-
-var dctFromBlock = 0;
-function printDctContractDetails() {
-  console.log("RESULT: dctContractAddress=" + dctContractAddress);
-  if (dctContractAddress != null && dctContractAbi != null) {
-    var contract = eth.contract(dctContractAbi).at(dctContractAddress);
+var tokenFromBlock = 0;
+function printTokenContractDetails() {
+  console.log("RESULT: tokenContractAddress=" + tokenContractAddress);
+  if (tokenContractAddress != null && tokenContractAbi != null) {
+    var contract = eth.contract(tokenContractAbi).at(tokenContractAddress);
     var decimals = contract.decimals();
-    console.log("RESULT: dct.owner=" + contract.owner());
-    console.log("RESULT: dct.symbol=" + contract.symbol());
-    console.log("RESULT: dct.name=" + contract.name());
-    console.log("RESULT: dct.decimals=" + decimals);
-    console.log("RESULT: dct.totalSupply=" + contract.totalSupply().shift(-18));
-    var startDate = contract.STARTDATE();
-    console.log("RESULT: dct.totalEthers=" + contract.totalEthers().shift(-18));
-    console.log("RESULT: dct.CAP=" + contract.CAP().shift(-18));
-    console.log("RESULT: dct.STARTDATE=" + startDate + " " + new Date(startDate * 1000).toUTCString()  + 
-        " / " + new Date(startDate * 1000).toGMTString());
-    var endDate = contract.ENDDATE();
-    console.log("RESULT: dct.ENDDATE=" + endDate + " " + new Date(endDate * 1000).toUTCString()  + 
-        " / " + new Date(endDate * 1000).toGMTString());
+    console.log("RESULT: token.symbol=" + contract.symbol());
+    console.log("RESULT: token.owner=" + contract.owner());
+    console.log("RESULT: token.newOwner=" + contract.newOwner());
+    // console.log("RESULT: token.name=" + contract.name());
+    console.log("RESULT: token.FUND_WALLET=" + contract.FUND_WALLET());
+    console.log("RESULT: token.TOKENS_PER_USD=" + contract.TOKENS_PER_USD());
+    console.log("RESULT: token.TOKENS_PER_ETH=" + contract.TOKENS_PER_ETH());
+    console.log("RESULT: token.USD_PER_ETH=" + contract.USD_PER_ETH());
+    console.log("RESULT: token.MIN_USD_FUND=" + contract.MIN_USD_FUND());
+    console.log("RESULT: token.MIN_ETH_FUND=" + contract.MIN_ETH_FUND().shift(-18));
+    console.log("RESULT: token.MAX_USD_FUND=" + contract.MAX_USD_FUND());
+    console.log("RESULT: token.MAX_ETH_FUND=" + contract.MAX_ETH_FUND().shift(-18));
+    console.log("RESULT: token.KYC_USD_LMT=" + contract.KYC_USD_LMT());
+    console.log("RESULT: token.KYC_ETH_LMT=" + contract.KYC_ETH_LMT().shift(-18));
+    console.log("RESULT: token.MAX_TOKENS=" + contract.MAX_TOKENS());
+    console.log("RESULT: token.PREFUND_PERIOD=" + contract.PREFUND_PERIOD());
+    console.log("RESULT: token.FUNDING_PERIOD=" + contract.FUNDING_PERIOD());
+    console.log("RESULT: token.totalSupply=" + contract.totalSupply().shift(-decimals));
+    // console.log("RESULT: token.__abortFuse=" + contract.__abortFuse());
+    console.log("RESULT: token.icoSuccessful=" + contract.icoSuccessful());
+    console.log("RESULT: token.veredictum=" + contract.veredictum());
+    console.log("RESULT: token.etherRaised=" + contract.etherRaised().shift(-18));
+    var fundDate = contract.FUND_DATE();
+    console.log("RESULT: token.FUND_DATE=" + fundDate + " " + new Date(fundDate * 1000).toUTCString());
+    var endDate = contract.END_DATE();
+    console.log("RESULT: token.END_DATE=" + endDate + " " + new Date(endDate * 1000).toUTCString());
 
     var latestBlock = eth.blockNumber;
     var i;
 
-    var tokensBoughtEvent = contract.TokensBought({}, { fromBlock: dctFromBlock, toBlock: latestBlock });
-    i = 0;
-    tokensBoughtEvent.watch(function (error, result) {
-      console.log("RESULT: TokensBought " + i++ + " #" + result.blockNumber + " buyer=" + result.args.buyer + 
-        " ethers=" + web3.fromWei(result.args.ethers, "ether") +
-        " newEtherBalance=" + web3.fromWei(result.args.newEtherBalance, "ether") + 
-        " tokens=" + result.args.tokens.shift(-decimals) + 
-        " multisigTokens=" + result.args.multisigTokens.shift(-decimals) + 
-        " newTotalSupply=" + result.args.newTotalSupply.shift(-decimals) + 
-        " tokensPerKEther=" + result.args.tokensPerKEther);
-    });
-    tokensBoughtEvent.stopWatching();
-
-    var approvalEvents = contract.Approval({}, { fromBlock: dctFromBlock, toBlock: latestBlock });
+    var approvalEvents = contract.Approval({}, { fromBlock: tokenFromBlock, toBlock: latestBlock });
     i = 0;
     approvalEvents.watch(function (error, result) {
-      console.log("RESULT: Approval " + i++ + " #" + result.blockNumber + " _owner=" + result.args._owner + " _spender=" + result.args._spender + " _value=" +
-        result.args._value.shift(-decimals));
+      console.log("RESULT: Approval " + i++ + " #" + result.blockNumber + " _owner=" + result.args._owner + " _spender=" +
+        result.args._spender + " _amount=" + result.args._amount.shift(-decimals));
     });
     approvalEvents.stopWatching();
 
-    var transferEvents = contract.Transfer({}, { fromBlock: dctFromBlock, toBlock: latestBlock });
+    var transferEvents = contract.Transfer({}, { fromBlock: tokenFromBlock, toBlock: latestBlock });
     i = 0;
     transferEvents.watch(function (error, result) {
       console.log("RESULT: Transfer " + i++ + " #" + result.blockNumber + ": _from=" + result.args._from + " _to=" + result.args._to +
-        " value=" + result.args._value.shift(-decimals));
+        " _amount=" + result.args._amount.shift(-decimals));
     });
     transferEvents.stopWatching();
 
-    dctFromBlock = latestBlock + 1;
+    tokenFromBlock = latestBlock + 1;
   }
 }

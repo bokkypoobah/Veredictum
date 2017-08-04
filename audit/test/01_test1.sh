@@ -32,7 +32,7 @@ if [ "$MODE" == "dev" ]; then
   STARTTIME=`echo "$CURRENTTIME" | bc`
 else
   # Start time 1m 10s in the future
-  STARTTIME=`echo "$CURRENTTIME+75" | bc`
+  STARTTIME=`echo "$CURRENTTIME+30" | bc`
 fi
 STARTTIME_S=`date -r $STARTTIME -u`
 ENDTIME=`echo "$CURRENTTIME+60*3" | bc`
@@ -57,9 +57,9 @@ printf "ENDTIME         = '$ENDTIME' '$ENDTIME_S'\n" | tee -a $TEST1OUTPUT
 `cp $CONTRACTSDIR/$TOKENSOL $TOKENTEMPSOL`
 
 # --- Modify parameters ---
-# `perl -pi -e "s/STARTDATE \= 1498741200;.*$/STARTDATE \= $STARTTIME; \/\/ $STARTTIME_S/" $TOKENTEMPSOL`
-# `perl -pi -e "s/ENDDATE \= STARTDATE \+ 28 days;.*$/ENDDATE \= STARTDATE \+ 5 minutes;/" $TOKENTEMPSOL`
-# `perl -pi -e "s/CAP \= 84417 ether;.*$/CAP \= 100 ether;/" $TOKENTEMPSOL`
+`perl -pi -e "s/FUND_WALLET     \= 0x0/FUND_WALLET     \= 0xa22AB8A9D641CE77e06D98b7D7065d324D3d6976/" $TOKENTEMPSOL`
+`perl -pi -e "s/FUND_DATE \= now \+ PREFUND_PERIOD;.*$/FUND_DATE \= $STARTTIME; \/\/ $STARTTIME_S/" $TOKENTEMPSOL`
+`perl -pi -e "s/END_DATE  \= FUND_DATE \+ FUNDING_PERIOD;.*$/END_DATE \= $ENDTIME; \/\/ $ENDTIME_S/" $TOKENTEMPSOL`
 
 DIFFS1=`diff $CONTRACTSDIR/$TOKENSOL $TOKENTEMPSOL`
 echo "--- Differences $CONTRACTSDIR/$TOKENSOL $TOKENTEMPSOL ---"
@@ -80,27 +80,28 @@ unlockAccounts("$PASSWORD");
 printBalances();
 console.log("RESULT: ");
 
-exit;
 
 // -----------------------------------------------------------------------------
-var dctMessage = "Deploy Token Contract";
-console.log("RESULT: " + teMessage);
-var dctContract = web3.eth.contract(dctAbi);
-console.log(JSON.stringify(dctContract));
-var dctTx = null;
-var dctAddress = null;
+var deployTokenMessage = "Deploy Token Contract";
+console.log("RESULT: " + deployTokenMessage);
+var tokenContract = web3.eth.contract(tokenAbi);
+console.log(JSON.stringify(tokenContract));
+var tokenTx = null;
+var tokenAddress = null;
 
-var dct = dctContract.new({from: contractOwnerAccount, data: dctBin, gas: 6000000},
+var token = tokenContract.new({from: contractOwnerAccount, data: tokenBin, gas: 6000000},
   function(e, contract) {
     if (!e) {
       if (!contract.address) {
-        dctTx = contract.transactionHash;
+        tokenTx = contract.transactionHash;
       } else {
-        dctAddress = contract.address;
-        addAccount(dctAddress, "BET Token Contract");
-        addDctContractAddressAndAbi(dctAddress, dctAbi);
-        addTokenContractAddressAndAbi(dctAddress, dctAbi);
-        console.log("DATA: dctAddress=" + dctAddress);
+        tokenAddress = contract.address;
+        console.log("RESULT: tokenAddress=" + tokenAddress);
+        console.log("RESULT: token.symbol()=" + token.symbol());
+        // TODO console.log("RESULT: token.name()=" + token.name());
+        addAccount(tokenAddress, "Token '" + token.symbol() + "'");
+        addTokenContractAddressAndAbi(tokenAddress, tokenAbi);
+        console.log("DATA: tokenAddress=" + tokenAddress);
       }
     }
   }
@@ -109,11 +110,43 @@ var dct = dctContract.new({from: contractOwnerAccount, data: dctBin, gas: 600000
 while (txpool.status.pending > 0) {
 }
 
-printTxData("dctAddress=" + dctAddress, dctTx);
+printTxData("tokenAddress=" + tokenAddress, tokenTx);
 printBalances();
-failIfGasEqualsGasUsed(dctTx, dctMessage);
-printDctContractDetails();
+failIfGasEqualsGasUsed(tokenTx, deployTokenMessage);
+printTokenContractDetails();
 console.log("RESULT: ");
+
+
+// -----------------------------------------------------------------------------
+// Wait for crowdsale start
+// -----------------------------------------------------------------------------
+var startTime = token.FUND_DATE();
+var startTimeDate = new Date(startTime * 1000);
+console.log("RESULT: Waiting until startTime at " + startTime + " " + startTimeDate +
+  " currentDate=" + new Date());
+while ((new Date()).getTime() <= startTimeDate.getTime()) {
+}
+console.log("RESULT: Waited until startTime at " + startTime + " " + startTimeDate +
+  " currentDate=" + new Date());
+
+
+// -----------------------------------------------------------------------------
+var validContribution1Message = "Send Valid Contribution - 10 ETH From Account5, 20 ETH From Account6";
+console.log("RESULT: " + validContribution1Message);
+var sendValidContribution1Tx = eth.sendTransaction({from: account5, to: tokenAddress, gas: 400000, value: web3.toWei("10", "ether")});
+var sendValidContribution2Tx = eth.sendTransaction({from: account6, to: tokenAddress, gas: 400000, value: web3.toWei("20", "ether")});
+while (txpool.status.pending > 0) {
+}
+printTxData("sendValidContribution1Tx", sendValidContribution1Tx);
+printTxData("sendValidContribution2Tx", sendValidContribution2Tx);
+printBalances();
+failIfGasEqualsGasUsed(sendValidContribution1Tx, validContribution1Message);
+failIfGasEqualsGasUsed(sendValidContribution2Tx, validContribution1Message);
+printTokenContractDetails();
+console.log("RESULT: ");
+
+
+exit;
 
 
 // -----------------------------------------------------------------------------
@@ -128,35 +161,6 @@ printTxData("preCommit2Tx", preCommit2Tx);
 printBalances();
 failIfGasEqualsGasUsed(preCommit1Tx, preCommitMessage);
 failIfGasEqualsGasUsed(preCommit2Tx, preCommitMessage);
-printDctContractDetails();
-console.log("RESULT: ");
-
-
-// -----------------------------------------------------------------------------
-// Wait for crowdsale start
-// -----------------------------------------------------------------------------
-var startTime = dct.STARTDATE();
-var startTimeDate = new Date(startTime * 1000);
-console.log("RESULT: Waiting until startTime at " + startTime + " " + startTimeDate +
-  " currentDate=" + new Date());
-while ((new Date()).getTime() <= startTimeDate.getTime()) {
-}
-console.log("RESULT: Waited until startTime at " + startTime + " " + startTimeDate +
-  " currentDate=" + new Date());
-
-
-// -----------------------------------------------------------------------------
-var validContribution1Message = "Send Valid Contribution - 7 ETH From Account5, 14 ETH From Account6";
-console.log("RESULT: " + validContribution1Message);
-var sendValidContribution1Tx = eth.sendTransaction({from: account5, to: dctAddress, gas: 400000, value: web3.toWei("7", "ether")});
-var sendValidContribution2Tx = eth.sendTransaction({from: account6, to: dctAddress, gas: 400000, value: web3.toWei("14", "ether")});
-while (txpool.status.pending > 0) {
-}
-printTxData("sendValidContribution1Tx", sendValidContribution1Tx);
-printTxData("sendValidContribution2Tx", sendValidContribution2Tx);
-printBalances();
-failIfGasEqualsGasUsed(sendValidContribution1Tx, validContribution1Message);
-failIfGasEqualsGasUsed(sendValidContribution2Tx, validContribution1Message);
 printDctContractDetails();
 console.log("RESULT: ");
 

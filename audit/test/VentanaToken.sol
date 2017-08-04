@@ -46,7 +46,7 @@ contract VentanaTokenConfig
     
     // Fund wallet should also be audited prior to deployment
     // NOTE: Must be checksummed address!
-    address public constant FUND_WALLET     = 0x0;
+    address public constant FUND_WALLET     = 0xa22AB8A9D641CE77e06D98b7D7065d324D3d6976;
     
     // Tokens awarded per USD contributed
     uint public constant    TOKENS_PER_USD  = 3;
@@ -358,8 +358,8 @@ contract VentanaToken is
     uint public constant KYC_ETH_LMT    = 1 ether * KYC_USD_LMT  / USD_PER_ETH;
 
     // General funding opens LEAD_IN_PERIOD after deployment (timestamps can't be constant)
-    uint public FUND_DATE = now + PREFUND_PERIOD;
-    uint public END_DATE  = FUND_DATE + FUNDING_PERIOD;
+    uint public FUND_DATE = 1501864178; // Fri  4 Aug 2017 16:29:38 UTC
+    uint public END_DATE = 1501864328; // Fri  4 Aug 2017 16:32:08 UTC
 
 //
 // Modifiers
