@@ -20,6 +20,12 @@ Commit [10ddcc98](https://github.com/o0ragman0o/Veredictum/tree/10ddcc98ede5696e
   standard functionality and move it away from the other custom functionalities
 * **LOW IMPORTANCE** `__abortFuse` should be declared **public** so users can read this variable from EtherScan to determine if the 
   crowdsale has been aborted
+* **MEDIUM IMPORTANCE** Add the following type of code at the end of `proxyPurchase(...)` to transfer contributed funds directly
+  into the more tested project multisig wallet - to minimise the risk of funds sitting in the crowdsale contract:
+
+      if (etherRaised > MIN_ETH_FUND) {
+          FUND_WALLET.transfer(this.balance);
+      }
 
 <br />
 
