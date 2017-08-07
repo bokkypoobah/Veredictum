@@ -57,9 +57,10 @@ printf "ENDTIME         = '$ENDTIME' '$ENDTIME_S'\n" | tee -a $TEST1OUTPUT
 `cp $CONTRACTSDIR/$TOKENSOL $TOKENTEMPSOL`
 
 # --- Modify parameters ---
-`perl -pi -e "s/FUND_WALLET     \= 0x0/FUND_WALLET     \= 0xa22AB8A9D641CE77e06D98b7D7065d324D3d6976/" $TOKENTEMPSOL`
-`perl -pi -e "s/FUND_DATE \= now \+ PREFUND_PERIOD;.*$/FUND_DATE \= $STARTTIME; \/\/ $STARTTIME_S/" $TOKENTEMPSOL`
-`perl -pi -e "s/END_DATE  \= FUND_DATE \+ FUNDING_PERIOD;.*$/END_DATE \= $ENDTIME; \/\/ $ENDTIME_S/" $TOKENTEMPSOL`
+`perl -pi -e "s/FUND_WALLET     \= 0x0;/FUND_WALLET     \= 0xa22AB8A9D641CE77e06D98b7D7065d324D3d6976;/" $TOKENTEMPSOL`
+`perl -pi -e "s/START_DATE      \= 1502668800;.*$/START_DATE      = $STARTTIME; \/\/ $STARTTIME_S/" $TOKENTEMPSOL`
+`perl -pi -e "s/END_DATE  \= START_DATE \+ FUNDING_PERIOD;.*$/END_DATE  \= $ENDTIME; \/\/ $ENDTIME_S/" $TOKENTEMPSOL`
+`perl -pi -e "s/USD_PER_ETH     \= 0;.*$/USD_PER_ETH     \= 270;/" $TOKENTEMPSOL`
 
 DIFFS1=`diff $CONTRACTSDIR/$TOKENSOL $TOKENTEMPSOL`
 echo "--- Differences $CONTRACTSDIR/$TOKENSOL $TOKENTEMPSOL ---"
@@ -83,6 +84,7 @@ console.log("RESULT: ");
 
 // -----------------------------------------------------------------------------
 var deployTokenMessage = "Deploy Token Contract";
+// -----------------------------------------------------------------------------
 console.log("RESULT: " + deployTokenMessage);
 var tokenContract = web3.eth.contract(tokenAbi);
 console.log(JSON.stringify(tokenContract));
@@ -118,9 +120,26 @@ console.log("RESULT: ");
 
 
 // -----------------------------------------------------------------------------
+var addKycAccountsMessage = "Add KYC Accounts";
+// -----------------------------------------------------------------------------
+console.log("RESULT: " + addKycAccountsMessage);
+var addKycAccounts1Tx = token.addKycAddress(account5, true, {from: contractOwnerAccount, to: tokenAddress, gas: 400000});
+var addKycAccounts2Tx = token.addKycAddress(account6, true, {from: contractOwnerAccount, to: tokenAddress, gas: 400000});
+while (txpool.status.pending > 0) {
+}
+printTxData("addKycAccounts1Tx", addKycAccounts1Tx);
+printTxData("addKycAccounts2Tx", addKycAccounts2Tx);
+printBalances();
+failIfGasEqualsGasUsed(addKycAccounts1Tx, addKycAccountsMessage + " ac5 true");
+failIfGasEqualsGasUsed(addKycAccounts2Tx, addKycAccountsMessage + " ac6 true");
+printTokenContractDetails();
+console.log("RESULT: ");
+
+
+// -----------------------------------------------------------------------------
 // Wait for crowdsale start
 // -----------------------------------------------------------------------------
-var startTime = token.FUND_DATE();
+var startTime = token.START_DATE();
 var startTimeDate = new Date(startTime * 1000);
 console.log("RESULT: Waiting until startTime at " + startTime + " " + startTimeDate +
   " currentDate=" + new Date());
@@ -131,17 +150,32 @@ console.log("RESULT: Waited until startTime at " + startTime + " " + startTimeDa
 
 
 // -----------------------------------------------------------------------------
-var validContribution1Message = "Send Valid Contribution - 10 ETH From Account5, 20 ETH From Account6";
+var validContribution1Message = "Send Valid Contribution";
+// -----------------------------------------------------------------------------
 console.log("RESULT: " + validContribution1Message);
-var sendValidContribution1Tx = eth.sendTransaction({from: account5, to: tokenAddress, gas: 400000, value: web3.toWei("10", "ether")});
-var sendValidContribution2Tx = eth.sendTransaction({from: account6, to: tokenAddress, gas: 400000, value: web3.toWei("20", "ether")});
+var sendValidContribution1Tx = eth.sendTransaction({from: account5, to: tokenAddress, gas: 400000, value: web3.toWei("1000.123333333333333333", "ether")});
+var sendValidContribution2Tx = eth.sendTransaction({from: account6, to: tokenAddress, gas: 400000, value: web3.toWei("7000.234444444444444444", "ether")});
 while (txpool.status.pending > 0) {
 }
 printTxData("sendValidContribution1Tx", sendValidContribution1Tx);
 printTxData("sendValidContribution2Tx", sendValidContribution2Tx);
 printBalances();
-failIfGasEqualsGasUsed(sendValidContribution1Tx, validContribution1Message);
-failIfGasEqualsGasUsed(sendValidContribution2Tx, validContribution1Message);
+failIfGasEqualsGasUsed(sendValidContribution1Tx, validContribution1Message + " 1000.x ETH from ac5");
+failIfGasEqualsGasUsed(sendValidContribution2Tx, validContribution1Message + " 7000.x ETH from ac6");
+printTokenContractDetails();
+console.log("RESULT: ");
+
+
+// -----------------------------------------------------------------------------
+var finaliseMessage = "Finalise Crowdsale";
+// -----------------------------------------------------------------------------
+console.log("RESULT: " + finaliseMessage);
+var finaliseTx = token.finaliseICO({from: contractOwnerAccount, to: tokenAddress, gas: 400000});
+while (txpool.status.pending > 0) {
+}
+printTxData("finaliseTx", finaliseTx);
+printBalances();
+failIfGasEqualsGasUsed(finaliseTx, finaliseMessage);
 printTokenContractDetails();
 console.log("RESULT: ");
 

@@ -217,17 +217,18 @@ function printTokenContractDetails() {
     console.log("RESULT: token.KYC_USD_LMT=" + contract.KYC_USD_LMT());
     console.log("RESULT: token.KYC_ETH_LMT=" + contract.KYC_ETH_LMT().shift(-18));
     console.log("RESULT: token.MAX_TOKENS=" + contract.MAX_TOKENS());
-    console.log("RESULT: token.PREFUND_PERIOD=" + contract.PREFUND_PERIOD());
     console.log("RESULT: token.FUNDING_PERIOD=" + contract.FUNDING_PERIOD());
     console.log("RESULT: token.totalSupply=" + contract.totalSupply().shift(-decimals));
     // console.log("RESULT: token.__abortFuse=" + contract.__abortFuse());
     console.log("RESULT: token.icoSuccessful=" + contract.icoSuccessful());
     console.log("RESULT: token.veredictum=" + contract.veredictum());
     console.log("RESULT: token.etherRaised=" + contract.etherRaised().shift(-18));
-    var fundDate = contract.FUND_DATE();
-    console.log("RESULT: token.FUND_DATE=" + fundDate + " " + new Date(fundDate * 1000).toUTCString());
+    var startDate = contract.START_DATE();
+    console.log("RESULT: token.START_DATE=" + startDate + " " + new Date(startDate * 1000).toUTCString());
     var endDate = contract.END_DATE();
     console.log("RESULT: token.END_DATE=" + endDate + " " + new Date(endDate * 1000).toUTCString());
+    console.log("RESULT: token.fundFailed=" + contract.fundFailed());
+    console.log("RESULT: token.fundSucceeded=" + contract.fundSucceeded());
 
     var latestBlock = eth.blockNumber;
     var i;
