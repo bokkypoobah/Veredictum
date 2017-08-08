@@ -203,10 +203,10 @@ function printTokenContractDetails() {
     var contract = eth.contract(tokenContractAbi).at(tokenContractAddress);
     var decimals = contract.decimals();
     console.log("RESULT: token.symbol=" + contract.symbol());
+    console.log("RESULT: token.name=" + contract.name());
     console.log("RESULT: token.owner=" + contract.owner());
     console.log("RESULT: token.newOwner=" + contract.newOwner());
-    // console.log("RESULT: token.name=" + contract.name());
-    console.log("RESULT: token.FUND_WALLET=" + contract.FUND_WALLET());
+    console.log("RESULT: token.fundWallet=" + contract.fundWallet());
     console.log("RESULT: token.TOKENS_PER_USD=" + contract.TOKENS_PER_USD());
     console.log("RESULT: token.TOKENS_PER_ETH=" + contract.TOKENS_PER_ETH());
     console.log("RESULT: token.USD_PER_ETH=" + contract.USD_PER_ETH());
@@ -219,7 +219,7 @@ function printTokenContractDetails() {
     console.log("RESULT: token.MAX_TOKENS=" + contract.MAX_TOKENS());
     console.log("RESULT: token.FUNDING_PERIOD=" + contract.FUNDING_PERIOD());
     console.log("RESULT: token.totalSupply=" + contract.totalSupply().shift(-decimals));
-    // console.log("RESULT: token.__abortFuse=" + contract.__abortFuse());
+    console.log("RESULT: token.__abortFuse=" + contract.__abortFuse());
     console.log("RESULT: token.icoSuccessful=" + contract.icoSuccessful());
     console.log("RESULT: token.veredictum=" + contract.veredictum());
     console.log("RESULT: token.etherRaised=" + contract.etherRaised().shift(-18));

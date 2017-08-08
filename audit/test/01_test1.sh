@@ -57,10 +57,10 @@ printf "ENDTIME         = '$ENDTIME' '$ENDTIME_S'\n" | tee -a $TEST1OUTPUT
 `cp $CONTRACTSDIR/$TOKENSOL $TOKENTEMPSOL`
 
 # --- Modify parameters ---
-`perl -pi -e "s/FUND_WALLET     \= 0x0;/FUND_WALLET     \= 0xa22AB8A9D641CE77e06D98b7D7065d324D3d6976;/" $TOKENTEMPSOL`
+`perl -pi -e "s/fundWallet      \= 0x0;/fundWallet      \= 0xa22AB8A9D641CE77e06D98b7D7065d324D3d6976;/" $TOKENTEMPSOL`
 `perl -pi -e "s/START_DATE      \= 1502668800;.*$/START_DATE      = $STARTTIME; \/\/ $STARTTIME_S/" $TOKENTEMPSOL`
 `perl -pi -e "s/END_DATE  \= START_DATE \+ FUNDING_PERIOD;.*$/END_DATE  \= $ENDTIME; \/\/ $ENDTIME_S/" $TOKENTEMPSOL`
-`perl -pi -e "s/USD_PER_ETH     \= 0;.*$/USD_PER_ETH     \= 270;/" $TOKENTEMPSOL`
+`perl -pi -e "s/USD_PER_ETH     \= 200;.*$/USD_PER_ETH     \= 270;/" $TOKENTEMPSOL`
 
 DIFFS1=`diff $CONTRACTSDIR/$TOKENSOL $TOKENTEMPSOL`
 echo "--- Differences $CONTRACTSDIR/$TOKENSOL $TOKENTEMPSOL ---"
@@ -153,14 +153,14 @@ console.log("RESULT: Waited until startTime at " + startTime + " " + startTimeDa
 var validContribution1Message = "Send Valid Contribution";
 // -----------------------------------------------------------------------------
 console.log("RESULT: " + validContribution1Message);
-var sendValidContribution1Tx = eth.sendTransaction({from: account5, to: tokenAddress, gas: 400000, value: web3.toWei("1000.123333333333333333", "ether")});
+var sendValidContribution1Tx = eth.sendTransaction({from: account5, to: tokenAddress, gas: 400000, value: web3.toWei("5000.123333333333333333", "ether")});
 var sendValidContribution2Tx = eth.sendTransaction({from: account6, to: tokenAddress, gas: 400000, value: web3.toWei("7000.234444444444444444", "ether")});
 while (txpool.status.pending > 0) {
 }
 printTxData("sendValidContribution1Tx", sendValidContribution1Tx);
 printTxData("sendValidContribution2Tx", sendValidContribution2Tx);
 printBalances();
-failIfGasEqualsGasUsed(sendValidContribution1Tx, validContribution1Message + " 1000.x ETH from ac5");
+failIfGasEqualsGasUsed(sendValidContribution1Tx, validContribution1Message + " 5000.x ETH from ac5");
 failIfGasEqualsGasUsed(sendValidContribution2Tx, validContribution1Message + " 7000.x ETH from ac6");
 printTokenContractDetails();
 console.log("RESULT: ");
