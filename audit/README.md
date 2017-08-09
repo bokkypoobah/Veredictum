@@ -39,6 +39,17 @@ Commits [10ddcc98](https://github.com/o0ragman0o/Veredictum/tree/10ddcc98ede5696
 
 <br />
 
+<hr />
+
+## Notes
+
+* Make sure that `constant` is not used in the `address public owner = msg.sender;` statement. It is far safer to
+  assign this variable in a/the constructor.
+
+<br />
+
+<hr />
+
 ## Code Review
 
 * [ ] [code-review/VentanaToken.md](code-review/VentanaToken.md)

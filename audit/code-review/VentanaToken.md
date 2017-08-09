@@ -37,6 +37,7 @@ waiting for `END_DATE`
 */
 
 
+// BK Ok
 pragma solidity ^0.4.13;
 
 /*-----------------------------------------------------------------------------\
@@ -46,90 +47,128 @@ pragma solidity ^0.4.13;
 \*----------------------------------------------------------------------------*/
 
 // Contains token sale parameters
+// BK Ok
 contract VentanaTokenConfig
 {
     // ERC20 trade name and symbol
+    // BK Ok
     string public           name            = "Ventana";
+    // BK Ok
     string public           symbol          = "VNT";
 
     // Owner has power to abort, discount addresses, sweep successful funds,
     // change owner, sweep alien tokens.
+    // BK NOTE - MAKE SURE `constant` is not used in the following statement
+    // BK Ok
     address public          owner           = msg.sender;
     
     // Fund wallet should also be audited prior to deployment
     // NOTE: Must be checksummed address!
+    // BK Ok
     address public          fundWallet      = 0x0;
 
     // Tokens awarded per USD contributed
+    // BK Ok
     uint public constant    TOKENS_PER_USD  = 3;
 
     // Ether market price in USD
+    // BK Ok
     uint public constant    USD_PER_ETH     = 200;
     
     // Minimum and maximum target in USD
+    // BK Ok
     uint public constant    MIN_USD_FUND    = 2000000;  // $2m
+    // BK Ok
     uint public constant    MAX_USD_FUND    = 20000000; // $20m
     
     // Non-KYC contribution limit in USD
+    // BK Ok
     uint public constant    KYC_USD_LMT     = 10000;
     
     // There will be exactly 300,000,000 tokens regardless of number sold
     // Unsold tokens are put into the Strategic Growth token pool
+    // BK Ok
     uint public constant    MAX_TOKENS      = 300000000;
     
     // Funding begins on 14th August 2017
     // `+ new Date('14 August 2017 GMT+0')/1000`
+    // BK NOTE - new Date(1502668800 * 1000).toUTCString() => "Mon, 14 Aug 2017 00:00:00 UTC"
+    // BK NOTE - new Date(1502668800 * 1000) => <Date Mon, 14 Aug 2017 10:00:00 AEST>
+    // BK Ok
     uint public constant    START_DATE      = 1502668800;
 
     // Period for fundraising
+    // BK Ok
     uint public constant    FUNDING_PERIOD  = 28 days;
 }
 
 
+// BK Ok
 library SafeMath
 {
     // a add to b
+    // BK Ok
     function add(uint a, uint b) internal returns (uint c) {
+        // BK Ok
         c = a + b;
+        // BK Ok - Overflow check
         assert(c >= a);
     }
     
     // a subtract b
+    // BK Ok
     function sub(uint a, uint b) internal returns (uint c) {
+        // BK Ok
         c = a - b;
+        // BK Ok - Underflow check
         assert(c <= a);
     }
     
     // a multiplied by b
+    // BK Ok
     function mul(uint a, uint b) internal returns (uint c) {
+        // BK Ok
         c = a * b;
+        // BK Ok
         assert(a == 0 || c / a == b);
     }
     
     // a divided by b
+    // BK Ok
     function div(uint a, uint b) internal returns (uint c) {
+        // BK Ok - The EVM will throw an error if a divide by zero is detected
         c = a / b;
         // No assert required as no overflows are posible.
     }
 }
 
 
+// BK Ok
 contract ReentryProtected
 {
     // The reentry protection state mutex.
+    // BK Ok
     bool __reMutex;
 
     // Sets and resets mutex in order to block functin reentry
+    // BK Ok
     modifier preventReentry() {
+        // BK Ok
         require(!__reMutex);
+        // BK Ok
         __reMutex = true;
+        // BK Ok
         _;
+        // BK Ok
         delete __reMutex;
     }
 
     // Blocks function entry if mutex is set
+    // BK Ok
     modifier noReentry() {
+        // BK Ok
         require(!__reMutex);
+        // BK Ok
         _;
     }
 }
@@ -145,26 +184,34 @@ contract ERC20Token
 /* State variable */
 
     /// @return The Total supply of tokens
+    // BK Ok
     uint public totalSupply;
     
     /// @return Token symbol
+    // BK Ok
     string public symbol;
     
     // Token ownership mapping
+    // BK Ok
     mapping (address => uint) balances;
     
     // Allowances mapping
+    // BK Ok
     mapping (address => mapping (address => uint)) allowed;
 
 /* Events */
 
     // Triggered when tokens are transferred.
+    // BK NOTE - Better to use `uint` or `uint256` consistently
+    // BK Ok
     event Transfer(
         address indexed _from,
         address indexed _to,
         uint256 _amount);
 
     // Triggered whenever approve(address _spender, uint256 _amount) is called.
+    // BK NOTE - Better to use `uint` or `uint256` consistently
+    // BK Ok
     event Approval(
         address indexed _owner,
         address indexed _spender,
@@ -177,67 +224,88 @@ contract ERC20Token
 /* Functions */
 
     // Using an explicit getter allows for function overloading    
+    // BK Ok - Constant function
     function balanceOf(address _addr)
         public
         constant
         returns (uint)
     {
+        // BK Ok
         return balances[_addr];
     }
     
     // Using an explicit getter allows for function overloading    
+    // BK Ok - Constant function
     function allowance(address _owner, address _spender)
         public
         constant
         returns (uint)
     {
+        // BK Ok
         return allowed[_owner][_spender];
     }
 
     // Send _value amount of tokens to address _to
+    // BK Ok
     function transfer(address _to, uint256 _amount)
         public
         returns (bool)
     {
+        // BK Ok
         return xfer(msg.sender, _to, _amount);
     }
 
     // Send _value amount of tokens from address _from to address _to
+    // BK Ok
     function transferFrom(address _from, address _to, uint256 _amount)
         public
         returns (bool)
     {
+        // BK Ok - Amount to transfer is less than or equal to the approved amount
         require(_amount <= allowed[_from][msg.sender]);
         
+        // BK Ok - Reduce approved amount
         allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(_amount);
+        // BK Ok
         return xfer(_from, _to, _amount);
     }
 
     // Process a transfer internally.
+    // BK Ok - Internal function
     function xfer(address _from, address _to, uint _amount)
         internal
         returns (bool)
     {
+        // BK Ok - Amount to be transferred is less than or equal to the source account balance
         require(_amount <= balances[_from]);
 
+        // BK Ok - Log event
         Transfer(_from, _to, _amount);
         
         // avoid wasting gas on 0 token transfers
+        // BK Ok - 0 is a valid tranfer in this token contract
         if(_amount == 0) return true;
         
+        // BK Ok
         balances[_from] = balances[_from].sub(_amount);
+        // BK Ok
         balances[_to]   = balances[_to].add(_amount);
         
+        // BK Ok
         return true;
     }
 
     // Approves a third-party spender
+    // BK Ok
     function approve(address _spender, uint256 _amount)
         public
         returns (bool)
     {
+        // BK Ok
         allowed[msg.sender][_spender] = _amount;
+        // BK Ok - Log event
         Approval(msg.sender, _spender, _amount);
+        // BK Ok
         return true;
     }
 }
