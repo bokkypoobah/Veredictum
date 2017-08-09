@@ -10,8 +10,8 @@ var accountNames = {};
 addAccount(eth.accounts[0], "Account #0 - Miner");
 addAccount(eth.accounts[1], "Account #1 - Contract Owner");
 addAccount(eth.accounts[2], "Account #2 - Multisig");
-addAccount(eth.accounts[3], "Account #3 - Precommit #1");
-addAccount(eth.accounts[4], "Account #4 - Precommit #2");
+addAccount(eth.accounts[3], "Account #3 - KYCed #1");
+addAccount(eth.accounts[4], "Account #4 - KYCed #2");
 addAccount(eth.accounts[5], "Account #5");
 addAccount(eth.accounts[6], "Account #6");
 addAccount(eth.accounts[7], "Account #7");
@@ -31,8 +31,8 @@ addAccount(eth.accounts[8], "Account #8");
 var minerAccount = eth.accounts[0];
 var contractOwnerAccount = eth.accounts[1];
 var multisig = eth.accounts[2];
-var preCommitAccount1 = eth.accounts[3];
-var preCommitAccount2 = eth.accounts[4];
+var account3 = eth.accounts[3];
+var account4 = eth.accounts[4];
 var account5 = eth.accounts[5];
 var account6 = eth.accounts[6];
 var account7 = eth.accounts[7];
@@ -232,6 +232,45 @@ function printTokenContractDetails() {
 
     var latestBlock = eth.blockNumber;
     var i;
+
+    var kycAddressEvents = contract.KYCAddress({}, { fromBlock: tokenFromBlock, toBlock: latestBlock });
+    i = 0;
+    kycAddressEvents.watch(function (error, result) {
+      console.log("RESULT: KYCAddress " + i++ + " #" + result.blockNumber + " _addr=" + result.args._addr + " _kyc=" +
+        result.args._kyc);
+    });
+    kycAddressEvents.stopWatching();
+
+    var refundedEvents = contract.Refunded({}, { fromBlock: tokenFromBlock, toBlock: latestBlock });
+    i = 0;
+    refundedEvents.watch(function (error, result) {
+      console.log("RESULT: Refunded " + i++ + " #" + result.blockNumber + " _addr=" + result.args._addr +
+        " _value=" + result.args._value.shift(-18));
+    });
+    refundedEvents.stopWatching();
+
+    var changedOwnerEvents = contract.ChangedOwner({}, { fromBlock: tokenFromBlock, toBlock: latestBlock });
+    i = 0;
+    changedOwnerEvents.watch(function (error, result) {
+      console.log("RESULT: ChangedOwner " + i++ + " #" + result.blockNumber + " _from=" + result.args._from +
+        " _to=" + result.args._to);
+    });
+    changedOwnerEvents.stopWatching();
+
+    var changeOwnerToEvents = contract.ChangeOwnerTo({}, { fromBlock: tokenFromBlock, toBlock: latestBlock });
+    i = 0;
+    changeOwnerToEvents.watch(function (error, result) {
+      console.log("RESULT: ChangeOwnerTo " + i++ + " #" + result.blockNumber + " _to=" + result.args._to);
+    });
+    changeOwnerToEvents.stopWatching();
+
+    var fundsTransferredEvents = contract.FundsTransferred({}, { fromBlock: tokenFromBlock, toBlock: latestBlock });
+    i = 0;
+    fundsTransferredEvents.watch(function (error, result) {
+      console.log("RESULT: FundsTransferred " + i++ + " #" + result.blockNumber + " _wallet=" + result.args._wallet +
+        " _value=" + result.args._value.shift(-18));
+    });
+    fundsTransferredEvents.stopWatching();
 
     var approvalEvents = contract.Approval({}, { fromBlock: tokenFromBlock, toBlock: latestBlock });
     i = 0;

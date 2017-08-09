@@ -1,0 +1,560 @@
+MODE            = 'test'
+GETHATTACHPOINT = 'ipc:./testchain/geth.ipc'
+PASSWORD        = 'testtest'
+CONTRACTSDIR    = '../../contracts'
+TOKENSOL        = 'VentanaToken.sol'
+TOKENTEMPSOL    = 'VentanaToken.sol'
+TOKENJS         = 'VentanaToken.js'
+DEPLOYMENTDATA  = 'deploymentData.txt'
+INCLUDEJS       = './include.js'
+TEST3OUTPUT     = 'test3output.txt'
+TEST3RESULTS    = 'test3results.txt'
+CURRENTTIME     = '1502292650' 'Wed  9 Aug 2017 15:30:50 UTC'
+STARTTIME       = '1502292725' 'Wed  9 Aug 2017 15:32:05 UTC'
+ENDTIME         = '1502292890' 'Wed  9 Aug 2017 15:34:50 UTC'
+Welcome to the Geth JavaScript console!
+
+instance: Geth/v1.6.7-stable-ab5646c5/darwin-amd64/go1.8.3
+coinbase: 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e
+at block: 447 (Thu, 10 Aug 2017 01:30:50 AEST)
+ datadir: /Users/bok/Projects/VeredictumCrowdsaleContractAudit/audit/test/testchain
+ modules: admin:1.0 debug:1.0 eth:1.0 miner:1.0 net:1.0 personal:1.0 rpc:1.0 txpool:1.0 web3:1.0
+
+> 
+true
+> 
+true
+> 
+> 
+undefined
+> 
+undefined
+> 
+> 
+DATA: tokenAbi=[{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_amount","type":"uint256"}],"name":"approve","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"veredictum","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_amount","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"abort","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"START_DATE","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"finaliseICO","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"MAX_ETH_FUND","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_addr","type":"address"},{"name":"_kyc","type":"bool"}],"name":"addKycAddress","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_addr","type":"address"}],"name":"proxyPurchase","outputs":[{"name":"","type":"bool"}],"payable":true,"type":"function"},{"constant":true,"inputs":[],"name":"END_DATE","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_addr","type":"address"}],"name":"changeVeredictum","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"fundWallet","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"fundSucceeded","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"fundFailed","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"__abortFuse","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"_addr","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"MIN_ETH_FUND","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"MAX_USD_FUND","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"acceptOwnership","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"destroy","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"icoSuccessful","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"kycAddresses","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"_wei","type":"uint256"}],"name":"ethToUsd","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"KYC_ETH_LMT","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"_wei","type":"uint256"}],"name":"ethToTokens","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"changeOwner","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"etherContributed","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_amount","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"MIN_USD_FUND","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"USD_PER_ETH","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"TOKENS_PER_ETH","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"_usd","type":"uint256"}],"name":"usdToEth","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"etherRaised","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"KYC_USD_LMT","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"newOwner","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"TOKENS_PER_USD","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"tokenAddress","type":"address"},{"name":"amount","type":"uint256"}],"name":"transferAnyERC20Token","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"usdRaised","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"MAX_TOKENS","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"FUNDING_PERIOD","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_addr","type":"address"}],"name":"refund","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"inputs":[],"payable":false,"type":"constructor"},{"payable":true,"type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_addr","type":"address"},{"indexed":true,"name":"_kyc","type":"bool"}],"name":"KYCAddress","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_addr","type":"address"},{"indexed":true,"name":"_value","type":"uint256"}],"name":"Refunded","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"}],"name":"ChangedOwner","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_to","type":"address"}],"name":"ChangeOwnerTo","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_wallet","type":"address"},{"indexed":true,"name":"_value","type":"uint256"}],"name":"FundsTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"},{"indexed":false,"name":"_amount","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_owner","type":"address"},{"indexed":true,"name":"_spender","type":"address"},{"indexed":false,"name":"_amount","type":"uint256"}],"name":"Approval","type":"event"}]
+undefined
+> 
+> 
+undefined
+> 
+RESULT:  # Account                                             EtherBalanceChange                          Token Name
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       25.000000000000000000           0.000000000000000000 Account #0 - Miner
+RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433        0.000000000000000000           0.000000000000000000 Account #1 - Contract Owner
+RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000 Account #2 - Multisig
+RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 Account #3 - KYCed #1
+RESULT:  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 Account #4 - KYCed #2
+RESULT:  5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.000000000000000000 Account #5
+RESULT:  6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.000000000000000000 Account #6
+RESULT:  7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.000000000000000000 Account #7
+RESULT:  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.000000000000000000 Account #8
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT:                                                                                     0.000000000000000000 Total Token Balances
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT: 
+undefined
+> 
+RESULT: 
+undefined
+> 
+> 
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+RESULT: Deploy Token Contract
+undefined
+> 
+undefined
+> 
+{"abi":[{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_amount","type":"uint256"}],"name":"approve","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"veredictum","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_amount","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"abort","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"START_DATE","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"finaliseICO","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"MAX_ETH_FUND","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_addr","type":"address"},{"name":"_kyc","type":"bool"}],"name":"addKycAddress","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_addr","type":"address"}],"name":"proxyPurchase","outputs":[{"name":"","type":"bool"}],"payable":true,"type":"function"},{"constant":true,"inputs":[],"name":"END_DATE","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_addr","type":"address"}],"name":"changeVeredictum","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"fundWallet","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"fundSucceeded","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"fundFailed","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"__abortFuse","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"_addr","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"MIN_ETH_FUND","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"MAX_USD_FUND","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"acceptOwnership","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"destroy","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"icoSuccessful","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"kycAddresses","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"_wei","type":"uint256"}],"name":"ethToUsd","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"KYC_ETH_LMT","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"_wei","type":"uint256"}],"name":"ethToTokens","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"changeOwner","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"etherContributed","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_amount","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"MIN_USD_FUND","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"USD_PER_ETH","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"TOKENS_PER_ETH","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"_usd","type":"uint256"}],"name":"usdToEth","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"etherRaised","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"KYC_USD_LMT","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"newOwner","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"TOKENS_PER_USD","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"tokenAddress","type":"address"},{"name":"amount","type":"uint256"}],"name":"transferAnyERC20Token","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"usdRaised","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"MAX_TOKENS","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"FUNDING_PERIOD","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_addr","type":"address"}],"name":"refund","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"inputs":[],"payable":false,"type":"constructor"},{"payable":true,"type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_addr","type":"address"},{"indexed":true,"name":"_kyc","type":"bool"}],"name":"KYCAddress","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_addr","type":"address"},{"indexed":true,"name":"_value","type":"uint256"}],"name":"Refunded","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"}],"name":"ChangedOwner","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_to","type":"address"}],"name":"ChangeOwnerTo","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_wallet","type":"address"},{"indexed":true,"name":"_value","type":"uint256"}],"name":"FundsTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"},{"indexed":false,"name":"_amount","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_owner","type":"address"},{"indexed":true,"name":"_spender","type":"address"},{"indexed":false,"name":"_amount","type":"uint256"}],"name":"Approval","type":"event"}],"eth":{"_requestManager":{"polls":{},"provider":{},"timeout":null},"accounts":["0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e","0xa11aae29840fbb5c86e6fd4cf809eba183aef433","0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976","0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0","0xa44a08d3f6933c69212114bb66e2df1813651844","0xa55a151eb00fded1634d27d1127b4be4627079ea","0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9","0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec","0xa88a05d2b88283ce84c8325760b72a64591279a2","0xa99a0ae3354c06b1459fd441a32a3f71005d7da0","0xaaaa9de1e6c564446ebca0fd102d8bd92093c756","0xabba43e7594e3b76afb157989e93c6621497fd4b","0xacca534c9f62ab495bd986e002ddf0f054caae4f","0xadda9b762a00ff12711113bfdc36958b73d7f915","0xaeea63b5479b50f79583ec49dacdcf86ddeff392","0xaffa4d3a80add8ce4018540e056dacb649589394","0xbbbb34fa53a801b5f298744490a1596438bbbe50"],"blockNumber":452,"coinbase":"0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e","compile":{},"gasPrice":"18000000000","hashrate":37354,"mining":true,"pendingTransactions":[],"protocolVersion":"0x3f","syncing":false}}
+undefined
+> 
+undefined
+> 
+undefined
+> 
+> 
+... 
+...... 
+......... 
+............ 
+............ 
+............ 
+............ 
+............ 
+............ 
+............ 
+............ 
+............ 
+............ 
+......... 
+...... 
+... 
+undefined
+> 
+> 
+... 
+undefined
+> 
+> 
+RESULT: tokenAddress=0xb3c7d39fdd2e7dcd02b660b1a317ae06c7c915cc
+RESULT: token.symbol()=VNT
+DATA: tokenAddress=0xb3c7d39fdd2e7dcd02b660b1a317ae06c7c915cc
+RESULT: tokenAddress=0xb3c7d39fdd2e7dcd02b660b1a317ae06c7c915cc gas=6000000 gasUsed=2112836 costETH=0.038031048 costUSD=14.46663034872 @ ETH/USD=380.39 gasPrice=18000000000 block=454 txId=0x22d1d255ea9469c1f52b035f59f3946b74b01e740398f0b66fafd6b85ab57e23
+undefined
+> 
+RESULT:  # Account                                             EtherBalanceChange                          Token Name
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       35.038031048000000000           0.000000000000000000 Account #0 - Miner
+RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.038031048000000000           0.000000000000000000 Account #1 - Contract Owner
+RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000   300000000.000000000000000000 Account #2 - Multisig
+RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 Account #3 - KYCed #1
+RESULT:  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 Account #4 - KYCed #2
+RESULT:  5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.000000000000000000 Account #5
+RESULT:  6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.000000000000000000 Account #6
+RESULT:  7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.000000000000000000 Account #7
+RESULT:  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.000000000000000000 Account #8
+RESULT:  9 0xb3c7d39fdd2e7dcd02b660b1a317ae06c7c915cc        0.000000000000000000           0.000000000000000000 Token 'VNT'
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT:                                                                             300000000.000000000000000000 Total Token Balances
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT: 
+undefined
+> 
+RESULT: PASS Deploy Token Contract
+1
+> 
+RESULT: tokenContractAddress=0xb3c7d39fdd2e7dcd02b660b1a317ae06c7c915cc
+RESULT: token.symbol=VNT
+RESULT: token.name=Ventana
+RESULT: token.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
+RESULT: token.newOwner=0x0000000000000000000000000000000000000000
+RESULT: token.fundWallet=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
+RESULT: token.TOKENS_PER_USD=3
+RESULT: token.TOKENS_PER_ETH=810
+RESULT: token.USD_PER_ETH=270
+RESULT: token.MIN_USD_FUND=2000000
+RESULT: token.MIN_ETH_FUND=7407.407407407407407407
+RESULT: token.MAX_USD_FUND=20000000
+RESULT: token.MAX_ETH_FUND=74074.074074074074074074
+RESULT: token.KYC_USD_LMT=10000
+RESULT: token.KYC_ETH_LMT=37.037037037037037037
+RESULT: token.MAX_TOKENS=300000000
+RESULT: token.FUNDING_PERIOD=2419200
+RESULT: token.totalSupply=300000000
+RESULT: token.__abortFuse=true
+RESULT: token.icoSuccessful=false
+RESULT: token.veredictum=0x0000000000000000000000000000000000000000
+RESULT: token.etherRaised=0
+RESULT: token.START_DATE=1502292725 Wed, 09 Aug 2017 15:32:05 UTC
+RESULT: token.END_DATE=1502292890 Wed, 09 Aug 2017 15:34:50 UTC
+RESULT: token.fundFailed=false
+RESULT: token.fundSucceeded=false
+RESULT: Transfer 0 #454: _from=0x0000000000000000000000000000000000000000 _to=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976 _amount=300000000
+undefined
+> 
+RESULT: 
+undefined
+> 
+> 
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+RESULT: Add KYC Accounts
+undefined
+> 
+undefined
+> 
+undefined
+> 
+... 
+undefined
+> 
+RESULT: addKycAccounts1Tx gas=400000 gasUsed=45500 costETH=0.000819 costUSD=0.31153941 @ ETH/USD=380.39 gasPrice=18000000000 block=456 txId=0x48f059d24a7c2e5725a34d96d8e4a78dcc600acf24ec9aa5ab4c56a0c9909cc1
+undefined
+> 
+RESULT: addKycAccounts2Tx gas=400000 gasUsed=45500 costETH=0.000819 costUSD=0.31153941 @ ETH/USD=380.39 gasPrice=18000000000 block=456 txId=0x5b54fb95a4840a30a4dca6f0f42c94204cf370b3a986937f649d520635c845b8
+undefined
+> 
+RESULT:  # Account                                             EtherBalanceChange                          Token Name
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       45.039669048000000000           0.000000000000000000 Account #0 - Miner
+RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.039669048000000000           0.000000000000000000 Account #1 - Contract Owner
+RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000   300000000.000000000000000000 Account #2 - Multisig
+RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 Account #3 - KYCed #1
+RESULT:  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 Account #4 - KYCed #2
+RESULT:  5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.000000000000000000 Account #5
+RESULT:  6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.000000000000000000 Account #6
+RESULT:  7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.000000000000000000 Account #7
+RESULT:  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.000000000000000000 Account #8
+RESULT:  9 0xb3c7d39fdd2e7dcd02b660b1a317ae06c7c915cc        0.000000000000000000           0.000000000000000000 Token 'VNT'
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT:                                                                             300000000.000000000000000000 Total Token Balances
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT: 
+undefined
+> 
+RESULT: PASS Add KYC Accounts ac3 true
+1
+> 
+RESULT: PASS Add KYC Accounts ac4 true
+1
+> 
+RESULT: tokenContractAddress=0xb3c7d39fdd2e7dcd02b660b1a317ae06c7c915cc
+RESULT: token.symbol=VNT
+RESULT: token.name=Ventana
+RESULT: token.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
+RESULT: token.newOwner=0x0000000000000000000000000000000000000000
+RESULT: token.fundWallet=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
+RESULT: token.TOKENS_PER_USD=3
+RESULT: token.TOKENS_PER_ETH=810
+RESULT: token.USD_PER_ETH=270
+RESULT: token.MIN_USD_FUND=2000000
+RESULT: token.MIN_ETH_FUND=7407.407407407407407407
+RESULT: token.MAX_USD_FUND=20000000
+RESULT: token.MAX_ETH_FUND=74074.074074074074074074
+RESULT: token.KYC_USD_LMT=10000
+RESULT: token.KYC_ETH_LMT=37.037037037037037037
+RESULT: token.MAX_TOKENS=300000000
+RESULT: token.FUNDING_PERIOD=2419200
+RESULT: token.totalSupply=300000000
+RESULT: token.__abortFuse=true
+RESULT: token.icoSuccessful=false
+RESULT: token.veredictum=0x0000000000000000000000000000000000000000
+RESULT: token.etherRaised=0
+RESULT: token.START_DATE=1502292725 Wed, 09 Aug 2017 15:32:05 UTC
+RESULT: token.END_DATE=1502292890 Wed, 09 Aug 2017 15:34:50 UTC
+RESULT: token.fundFailed=false
+RESULT: token.fundSucceeded=false
+RESULT: KYCAddress 0 #456 _addr=0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0 _kyc=true
+RESULT: KYCAddress 1 #456 _addr=0xa44a08d3f6933c69212114bb66e2df1813651844 _kyc=true
+undefined
+> 
+RESULT: 
+undefined
+> 
+> 
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+RESULT: Send Contributions Before Start
+undefined
+> 
+undefined
+> 
+undefined
+> 
+... 
+undefined
+> 
+RESULT: contributionsBeforeStart1Tx gas=400000 gasUsed=91179 costETH=0.001641222 costUSD=0.62430443658 @ ETH/USD=380.39 gasPrice=18000000000 block=459 txId=0x43d5b8909524ee1b5128c27cfecb5ee61f69ce358df6ea7ca876aeb23fee8837
+undefined
+> 
+RESULT: contributionsBeforeStart2Tx gas=400000 gasUsed=400000 costETH=0.0072 costUSD=2.738808 @ ETH/USD=380.39 gasPrice=18000000000 block=459 txId=0x64549030e3c5bf6a417ba1ba219c63bfc2c9f133a6ecfdd6562a0e9b4f2f2448
+undefined
+> 
+RESULT:  # Account                                             EtherBalanceChange                          Token Name
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       60.048510270000000000           0.000000000000000000 Account #0 - Miner
+RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.039669048000000000           0.000000000000000000 Account #1 - Contract Owner
+RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000   299991900.000000000000000000 Account #2 - Multisig
+RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 Account #3 - KYCed #1
+RESULT:  4 0xa44a08d3f6933c69212114bb66e2df1813651844      -10.001641222000000000        8100.000000000000000000 Account #4 - KYCed #2
+RESULT:  5 0xa55a151eb00fded1634d27d1127b4be4627079ea       -0.007200000000000000           0.000000000000000000 Account #5
+RESULT:  6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.000000000000000000 Account #6
+RESULT:  7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.000000000000000000 Account #7
+RESULT:  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.000000000000000000 Account #8
+RESULT:  9 0xb3c7d39fdd2e7dcd02b660b1a317ae06c7c915cc       10.000000000000000000           0.000000000000000000 Token 'VNT'
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT:                                                                             300000000.000000000000000000 Total Token Balances
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT: 
+undefined
+> 
+RESULT: PASS Send Contributions Before Start 10 ETH from ac4 (KYC-ed)
+1
+> 
+RESULT: PASS Send Contributions Before Start 20 ETH from ac5 (non-KYCe-ed) fail
+1
+> 
+RESULT: tokenContractAddress=0xb3c7d39fdd2e7dcd02b660b1a317ae06c7c915cc
+RESULT: token.symbol=VNT
+RESULT: token.name=Ventana
+RESULT: token.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
+RESULT: token.newOwner=0x0000000000000000000000000000000000000000
+RESULT: token.fundWallet=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
+RESULT: token.TOKENS_PER_USD=3
+RESULT: token.TOKENS_PER_ETH=810
+RESULT: token.USD_PER_ETH=270
+RESULT: token.MIN_USD_FUND=2000000
+RESULT: token.MIN_ETH_FUND=7407.407407407407407407
+RESULT: token.MAX_USD_FUND=20000000
+RESULT: token.MAX_ETH_FUND=74074.074074074074074074
+RESULT: token.KYC_USD_LMT=10000
+RESULT: token.KYC_ETH_LMT=37.037037037037037037
+RESULT: token.MAX_TOKENS=300000000
+RESULT: token.FUNDING_PERIOD=2419200
+RESULT: token.totalSupply=300000000
+RESULT: token.__abortFuse=true
+RESULT: token.icoSuccessful=false
+RESULT: token.veredictum=0x0000000000000000000000000000000000000000
+RESULT: token.etherRaised=10
+RESULT: token.START_DATE=1502292725 Wed, 09 Aug 2017 15:32:05 UTC
+RESULT: token.END_DATE=1502292890 Wed, 09 Aug 2017 15:34:50 UTC
+RESULT: token.fundFailed=false
+RESULT: token.fundSucceeded=false
+RESULT: Transfer 0 #459: _from=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976 _to=0xa44a08d3f6933c69212114bb66e2df1813651844 _amount=8100
+undefined
+> 
+RESULT: 
+undefined
+> 
+> 
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+... 
+RESULT: Waiting until startTime at 1502292725 Thu, 10 Aug 2017 01:32:05 AEST currentDate=Thu, 10 Aug 2017 01:32:06 AEST
+undefined
+> 
+... 
+undefined
+> 
+... 
+RESULT: Waited until startTime at 1502292725 Thu, 10 Aug 2017 01:32:05 AEST currentDate=Thu, 10 Aug 2017 01:32:06 AEST
+undefined
+> 
+RESULT: 
+undefined
+> 
+> 
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+RESULT: Send Valid Contribution
+undefined
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+... 
+undefined
+> 
+RESULT: sendValidContribution1Tx gas=400000 gasUsed=76132 costETH=0.001370376 costUSD=0.52127732664 @ ETH/USD=380.39 gasPrice=18000000000 block=461 txId=0x362ec398c85798a53d013dd87e4a2dff0673b503d3b26a7b66c63186d17cad0d
+undefined
+> 
+RESULT: sendValidContribution2Tx gas=400000 gasUsed=46132 costETH=0.000830376 costUSD=0.31586672664 @ ETH/USD=380.39 gasPrice=18000000000 block=461 txId=0x87c7b12cac6fb15040d85af9cf2b5ee91287c58b47fe707292d0584202a66d37
+undefined
+> 
+RESULT: sendValidContribution3Tx gas=400000 gasUsed=76482 costETH=0.001376676 costUSD=0.52367378364 @ ETH/USD=380.39 gasPrice=18000000000 block=461 txId=0x769e5d0760e5f24f16256f4cd53edc701024e80121c7e83a641acac4dfdf32cf
+undefined
+> 
+RESULT:  # Account                                             EtherBalanceChange                          Token Name
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       70.052087698000000000           0.000000000000000000 Account #0 - Miner
+RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.039669048000000000           0.000000000000000000 Account #1 - Contract Owner
+RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000   299876461.220000900000001513 Account #2 - Multisig
+RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0      -50.124703709333333333       44659.889999999999999703 Account #3 - KYCed #1
+RESULT:  4 0xa44a08d3f6933c69212114bb66e2df1813651844      -80.236916042444444444       70678.889999999999999604 Account #4 - KYCed #2
+RESULT:  5 0xa55a151eb00fded1634d27d1127b4be4627079ea      -10.132033465012345678        8199.999999099999999180 Account #5
+RESULT:  6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.000000000000000000 Account #6
+RESULT:  7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.000000000000000000 Account #7
+RESULT:  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.000000000000000000 Account #8
+RESULT:  9 0xb3c7d39fdd2e7dcd02b660b1a317ae06c7c915cc      140.481234566790123455           0.000000000000000000 Token 'VNT'
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT:                                                                             300000000.000000000000000000 Total Token Balances
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT: 
+undefined
+> 
+RESULT: PASS Send Valid Contribution 50.x ETH from ac3 (KYC-ed)
+1
+> 
+RESULT: PASS Send Valid Contribution 70.x ETH from ac4 (KYC-ed)
+1
+> 
+RESULT: PASS Send Valid Contribution 10.x ETH from ac5 (non-KYC-ed)
+1
+> 
+RESULT: tokenContractAddress=0xb3c7d39fdd2e7dcd02b660b1a317ae06c7c915cc
+RESULT: token.symbol=VNT
+RESULT: token.name=Ventana
+RESULT: token.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
+RESULT: token.newOwner=0x0000000000000000000000000000000000000000
+RESULT: token.fundWallet=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
+RESULT: token.TOKENS_PER_USD=3
+RESULT: token.TOKENS_PER_ETH=810
+RESULT: token.USD_PER_ETH=270
+RESULT: token.MIN_USD_FUND=2000000
+RESULT: token.MIN_ETH_FUND=7407.407407407407407407
+RESULT: token.MAX_USD_FUND=20000000
+RESULT: token.MAX_ETH_FUND=74074.074074074074074074
+RESULT: token.KYC_USD_LMT=10000
+RESULT: token.KYC_ETH_LMT=37.037037037037037037
+RESULT: token.MAX_TOKENS=300000000
+RESULT: token.FUNDING_PERIOD=2419200
+RESULT: token.totalSupply=300000000
+RESULT: token.__abortFuse=true
+RESULT: token.icoSuccessful=false
+RESULT: token.veredictum=0x0000000000000000000000000000000000000000
+RESULT: token.etherRaised=140.481234566790123455
+RESULT: token.START_DATE=1502292725 Wed, 09 Aug 2017 15:32:05 UTC
+RESULT: token.END_DATE=1502292890 Wed, 09 Aug 2017 15:34:50 UTC
+RESULT: token.fundFailed=false
+RESULT: token.fundSucceeded=false
+RESULT: Transfer 0 #461: _from=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976 _to=0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0 _amount=44659.889999999999999703
+RESULT: Transfer 1 #461: _from=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976 _to=0xa55a151eb00fded1634d27d1127b4be4627079ea _amount=8199.99999909999999918
+RESULT: Transfer 2 #461: _from=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976 _to=0xa44a08d3f6933c69212114bb66e2df1813651844 _amount=62578.889999999999999604
+undefined
+> 
+RESULT: 
+undefined
+> 
+> 
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+... 
+RESULT: Waiting until endTime at 1502292890 Thu, 10 Aug 2017 01:34:50 AEST currentDate=Thu, 10 Aug 2017 01:32:11 AEST
+undefined
+> 
+... 
+undefined
+> 
+... 
+RESULT: Waited until endTime at 1502292890 Thu, 10 Aug 2017 01:34:50 AEST currentDate=Thu, 10 Aug 2017 01:34:50 AEST
+undefined
+> 
+RESULT: 
+undefined
+> 
+> 
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+RESULT: Claim Refunds
+undefined
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+... 
+undefined
+> 
+RESULT: claimRefunds1Tx gas=100000 gasUsed=40637 costETH=0.000731466 costUSD=0.27824235174 @ ETH/USD=380.39 gasPrice=18000000000 block=493 txId=0xfa60dcde3170574d28e1b54c3c4135ac564fc5f9c47f80ea64d503fdec87a413
+undefined
+> 
+RESULT: claimRefunds2Tx gas=100000 gasUsed=40637 costETH=0.000731466 costUSD=0.27824235174 @ ETH/USD=380.39 gasPrice=18000000000 block=493 txId=0xc009cfb8720ed03889280740087e182c7a9479fa6009d67e81fab92f0bb53eec
+undefined
+> 
+RESULT: claimRefunds3Tx gas=100000 gasUsed=40637 costETH=0.000731466 costUSD=0.27824235174 @ ETH/USD=380.39 gasPrice=18000000000 block=493 txId=0xcffa8378f1fc77ecb55c846cf9c576d6b2b33289bf3d4f72d324ab8bf92435a3
+undefined
+> 
+RESULT:  # Account                                             EtherBalanceChange                          Token Name
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e      230.054282096000000000           0.000000000000000000 Account #0 - Miner
+RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.039669048000000000           0.000000000000000000 Account #1 - Contract Owner
+RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000   300000000.000000000000000000 Account #2 - Multisig
+RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0       -0.003564774000000000           0.000000000000000000 Account #3 - KYCed #1
+RESULT:  4 0xa44a08d3f6933c69212114bb66e2df1813651844       -0.002471598000000000           0.000000000000000000 Account #4 - KYCed #2
+RESULT:  5 0xa55a151eb00fded1634d27d1127b4be4627079ea       -0.008576676000000000           0.000000000000000000 Account #5
+RESULT:  6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.000000000000000000 Account #6
+RESULT:  7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.000000000000000000 Account #7
+RESULT:  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.000000000000000000 Account #8
+RESULT:  9 0xb3c7d39fdd2e7dcd02b660b1a317ae06c7c915cc        0.000000000000000000           0.000000000000000000 Token 'VNT'
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT:                                                                             300000000.000000000000000000 Total Token Balances
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT: 
+undefined
+> 
+RESULT: PASS Claim Refunds - ac3 claiming refunds for ac3
+1
+> 
+RESULT: PASS Claim Refunds - ac3 claiming refunds for ac4
+1
+> 
+RESULT: PASS Claim Refunds - ac3 claiming refunds for ac5
+1
+> 
+RESULT: tokenContractAddress=0xb3c7d39fdd2e7dcd02b660b1a317ae06c7c915cc
+RESULT: token.symbol=VNT
+RESULT: token.name=Ventana
+RESULT: token.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
+RESULT: token.newOwner=0x0000000000000000000000000000000000000000
+RESULT: token.fundWallet=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
+RESULT: token.TOKENS_PER_USD=3
+RESULT: token.TOKENS_PER_ETH=810
+RESULT: token.USD_PER_ETH=270
+RESULT: token.MIN_USD_FUND=2000000
+RESULT: token.MIN_ETH_FUND=7407.407407407407407407
+RESULT: token.MAX_USD_FUND=20000000
+RESULT: token.MAX_ETH_FUND=74074.074074074074074074
+RESULT: token.KYC_USD_LMT=10000
+RESULT: token.KYC_ETH_LMT=37.037037037037037037
+RESULT: token.MAX_TOKENS=300000000
+RESULT: token.FUNDING_PERIOD=2419200
+RESULT: token.totalSupply=300000000
+RESULT: token.__abortFuse=true
+RESULT: token.icoSuccessful=false
+RESULT: token.veredictum=0x0000000000000000000000000000000000000000
+RESULT: token.etherRaised=140.481234566790123455
+RESULT: token.START_DATE=1502292725 Wed, 09 Aug 2017 15:32:05 UTC
+RESULT: token.END_DATE=1502292890 Wed, 09 Aug 2017 15:34:50 UTC
+RESULT: token.fundFailed=true
+RESULT: token.fundSucceeded=false
+RESULT: Refunded 0 #493 _addr=0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0 _value=50.123333333333333333
+RESULT: Refunded 1 #493 _addr=0xa44a08d3f6933c69212114bb66e2df1813651844 _value=80.234444444444444444
+RESULT: Refunded 2 #493 _addr=0xa55a151eb00fded1634d27d1127b4be4627079ea _value=10.123456789012345678
+RESULT: Transfer 0 #493: _from=0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0 _to=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976 _amount=44659.889999999999999703
+RESULT: Transfer 1 #493: _from=0xa44a08d3f6933c69212114bb66e2df1813651844 _to=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976 _amount=70678.889999999999999604
+RESULT: Transfer 2 #493: _from=0xa55a151eb00fded1634d27d1127b4be4627079ea _to=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976 _amount=8199.99999909999999918
+undefined
+> 
+RESULT: 
+undefined
+> 
+> 
+> 

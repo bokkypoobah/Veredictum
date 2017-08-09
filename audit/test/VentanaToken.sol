@@ -70,7 +70,7 @@ contract VentanaTokenConfig
     
     // Funding begins on 14th August 2017
     // `+ new Date('14 August 2017 GMT+0')/1000`
-    uint public constant    START_DATE      = 1502215742; // Tue  8 Aug 2017 18:09:02 UTC
+    uint public constant    START_DATE      = 1502292725; // Wed  9 Aug 2017 15:32:05 UTC
 
     // Period for fundraising
     uint public constant    FUNDING_PERIOD  = 28 days;
@@ -369,7 +369,7 @@ contract VentanaToken is
     uint public constant KYC_ETH_LMT    = 1 ether * KYC_USD_LMT  / USD_PER_ETH;
 
     // General funding opens LEAD_IN_PERIOD after deployment (timestamps can't be constant)
-    uint public END_DATE  = 1502215892; // Tue  8 Aug 2017 18:11:32 UTC
+    uint public END_DATE  = 1502292890; // Wed  9 Aug 2017 15:34:50 UTC
 
 //
 // Modifiers

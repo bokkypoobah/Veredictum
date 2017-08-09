@@ -173,8 +173,10 @@ contract ReentryProtected
     }
 }
 
+// BK Ok
 contract ERC20Token
 {
+    // BK Ok
     using SafeMath for uint;
 
 /* Constants */
@@ -342,9 +344,11 @@ Reentry mutex set in moveFundsToWallet(), refund()
 
 \*----------------------------------------------------------------------------*/
 
+// BK Ok
 contract VentanaTokenAbstract
 {
 // TODO comment events
+    // BK Next 5 Ok
     event KYCAddress(address indexed _addr, bool indexed _kyc);
     event Refunded(address indexed _addr, uint indexed _value);
     event ChangedOwner(address indexed _from, address indexed _to);
@@ -352,70 +356,92 @@ contract VentanaTokenAbstract
     event FundsTransferred(address indexed _wallet, uint indexed _value);
 
     // This fuse blows upon calling abort() which forces a fail state
+    // BK Ok
     bool public __abortFuse = true;
     
     // Set to true after the fund is swept to the fund wallet, allows token
     // transfers and prevents abort()
+    // BK Ok
     bool public icoSuccessful;
 
     // Token conversion factors are calculated with decimal places at parity with ether
+    // BK Ok - Good to use `uint8` as this is the standard
     uint8 public constant decimals = 18;
 
     // An address authorised to take ownership
+    // BK Ok
     address public newOwner;
     
     // The Veredictum smart contract address
+    // BK Ok
     address public veredictum;
     
     // Total ether raised during funding
+    // BK Ok
     uint public etherRaised;
     
     // Preauthorized tranch discount addresses
     // holder => discount
+    // BK Ok
     mapping (address => bool) public kycAddresses;
     
     // Record of ether paid per address
+    // BK Ok
     mapping (address => uint) public etherContributed;
 
     // Return `true` if MIN_FUNDS were raised
+    // BK Ok
     function fundSucceeded() public constant returns (bool);
     
     // Return `true` if MIN_FUNDS were not raised before END_DATE
+    // BK Ok
     function fundFailed() public constant returns (bool);
 
     // Returns USD raised for set ETH/USD rate
+    // BK Ok
     function usdRaised() public constant returns (uint);
 
     // Returns an amount in eth equivilent to USD at the set rate
+    // BK Ok
     function usdToEth(uint) public constant returns(uint);
     
     // Returns the USD value of ether at the set USD/ETH rate
+    // BK Ok
     function ethToUsd(uint _wei) public constant returns (uint);
 
-    // Returns token/ether conversion given ether value and address. 
+    // Returns token/ether conversion given ether value and address.
+    // BK Ok 
     function ethToTokens(uint _eth)
         public constant returns (uint);
 
     // Processes a token purchase for a given address
+    // BK Ok
     function proxyPurchase(address _addr) payable returns (bool);
 
     // Owner can move funds of successful fund to fundWallet 
+    // BK Ok
     function finaliseICO() public returns (bool);
     
     // Registers a discounted address
+    // BK Ok
     function addKycAddress(address _addr, bool _kyc)
         public returns (bool);
 
-    // Refund on failed or aborted sale 
+    // Refund on failed or aborted sale
+    // BK Ok 
     function refund(address _addr) public returns (bool);
 
     // To cancel token sale prior to START_DATE
+    // BK NOTE - END_DATE, not START_DATE
+    // BK Ok
     function abort() public returns (bool);
     
     // Change the Veredictum backend contract address
+    // BK Ok
     function changeVeredictum(address _addr) public returns (bool);
     
     // For owner to salvage tokens sent to contract
+    // BK Ok
     function transferAnyERC20Token(address tokenAddress, uint amount)
         returns (bool);
 }
@@ -427,33 +453,43 @@ contract VentanaTokenAbstract
 
 \*----------------------------------------------------------------------------*/
 
+// BK Ok
 contract VentanaToken is 
     ReentryProtected,
     ERC20Token,
     VentanaTokenAbstract,
     VentanaTokenConfig
 {
+    // BK Ok
     using SafeMath for uint;
 
 //
 // Constants
 //
 
-    // USD to ether conversion factors calculated from `VentanaTokenConfig` constants 
+    // USD to ether conversion factors calculated from `VentanaTokenConfig` constants
+    // BK Ok 
     uint public constant TOKENS_PER_ETH = TOKENS_PER_USD * USD_PER_ETH;
+    // BK Ok
     uint public constant MIN_ETH_FUND   = 1 ether * MIN_USD_FUND / USD_PER_ETH;
+    // BK Ok
     uint public constant MAX_ETH_FUND   = 1 ether * MAX_USD_FUND / USD_PER_ETH;
+    // BK Ok
     uint public constant KYC_ETH_LMT    = 1 ether * KYC_USD_LMT  / USD_PER_ETH;
 
     // General funding opens LEAD_IN_PERIOD after deployment (timestamps can't be constant)
+    // BK Ok
     uint public END_DATE  = START_DATE + FUNDING_PERIOD;
 
 //
 // Modifiers
 //
 
+    // BK Ok
     modifier onlyOwner {
+        // BK Ok
         require(msg.sender == owner);
+        // BK Ok
         _;
     }
 
@@ -462,33 +498,50 @@ contract VentanaToken is
 //
 
     // Constructor
+    // BK Ok - Constructor
     function VentanaToken()
     {
         // ICO parameters are set in VentanaTSConfig
         // Invalid configuration catching here
+        // BK Ok
         require(bytes(symbol).length > 0);
+        // BK Ok
         require(bytes(name).length > 0);
+        // BK Ok
         require(owner != 0x0);
+        // BK Ok
         require(fundWallet != 0x0);
+        // BK Ok
         require(TOKENS_PER_USD > 0);
+        // BK Ok
         require(USD_PER_ETH > 0);
+        // BK Ok
         require(MIN_USD_FUND > 0);
+        // BK Ok
         require(MAX_USD_FUND > MIN_USD_FUND);
+        // BK Ok
         require(START_DATE > 0);
+        // BK Ok
         require(FUNDING_PERIOD > 0);
         
         // Setup and allocate token supply to 18 decimal places
+        // BK NOTE - Could specify as `totalSupply = MAX_TOKENS * 10**uint256(decimals);` instead of hardcoding decimals in 2 places
+        // BK Ok 
         totalSupply = MAX_TOKENS * 1e18;
+        // BK Ok
         balances[fundWallet] = totalSupply;
+        // BK Ok
         Transfer(0x0, fundWallet, totalSupply);
     }
     
     // Default function
+    // BK Ok - Anyone can call this function, with the payable modifier for the contract to accept ETH
     function ()
         payable
     {
         // Pass through to purchasing function. Will throw on failed or
         // successful ICO
+        // BK Ok
         proxyPurchase(msg.sender);
     }
 
@@ -497,43 +550,60 @@ contract VentanaToken is
 //
 
     // ICO fails if aborted or minimum funds are not raised by the end date
+    // BK NOTE - __abortFuse = true (default) if not aborted, false if abort() called
+    // BK NOTE - failed if aborted OR minimum funding not met by end date
+    // BK Ok - Constant function
     function fundFailed() public constant returns (bool)
     {
+        // BK Ok - Aborted?
         return !__abortFuse
+            // BK Ok - minimum funding not met by end date
             || (now > END_DATE && etherRaised < MIN_ETH_FUND);
     }
     
     // Funding succeeds if not aborted, minimum funds are raised before end date
+    // BK Ok
     function fundSucceeded() public constant returns (bool)
     {
+        // BK Ok
         return !fundFailed()
+            // BK Ok
             && etherRaised >= MIN_ETH_FUND;
     }
 
     // Returns the USD value of ether at the set USD/ETH rate
+    // BK Ok
     function ethToUsd(uint _wei) public constant returns (uint)
     {
+        // BK Ok
         return USD_PER_ETH.mul(_wei).div(1 ether);
     }
     
     // Returns the ether value of USD at the set USD/ETH rate
+    // BK Ok - Constant function
     function usdToEth(uint _usd) public constant returns (uint)
     {
+        // BK Ok
         return _usd.mul(1 ether).div(USD_PER_ETH);
     }
     
     // Returns the USD value of ether raised at the set USD/ETH rate
+    // BK Ok - Constant function
     function usdRaised() public constant returns (uint)
     {
+        // BK Ok
         return ethToUsd(etherRaised);
     }
     
     // Returns the number of tokens for given amount of ether for an address 
+    // BK Ok
     function ethToTokens(uint _wei) public constant returns (uint)
     {
+        // BK Ok
         uint usd = ethToUsd(_wei);
         
         // Percent bonus funding tiers for USD funding
+        // BK Ok
         uint bonus =
             usd >= 2000000 ? 35 :
             usd >= 500000  ? 30 :
@@ -544,6 +614,7 @@ contract VentanaToken is
                              0;  
         
         // using n.2 fixed point decimal for whole number percentage.
+        // BK Ok
         return _wei.mul(TOKENS_PER_ETH).mul(bonus + 100).div(100);
     }
 
@@ -554,104 +625,142 @@ contract VentanaToken is
     // The fundraising can be aborted any time before funds are swept to the
     // fundWallet.
     // This will force a fail state and allow refunds to be collected.
+    // BK Ok - Owner can `abort()` if `finaliseICO()` is not called
     function abort()
         public
         noReentry
         onlyOwner
         returns (bool)
     {
+        // BK Ok - icoSuccessful is only set if `finaliseICO()` is called
         require(!icoSuccessful);
+        // BK Ok
         delete __abortFuse;
+        // BK Ok
         return true;
     }
     
     // General addresses can purchase tokens during funding
+    // BK Ok - Anyone can call this function, with the payable modifier for the contract to accept ETH
     function proxyPurchase(address _addr)
         payable
         noReentry
         returns (bool)
     {
+        // BK Ok
         require(!fundFailed());
+        // BK OK
         require(!icoSuccessful);
+        // BK Ok
         require(now <= END_DATE);
+        // BK Ok
         require(msg.value > 0);
         
         // Non-KYC'ed funders can only contribute up to $10000 after prefund period
+        // BK Ok
         if(!kycAddresses[_addr])
         {
+            // BK Ok
             require(now >= START_DATE);
+            // BK Ok
             require((etherContributed[_addr].add(msg.value)) <= KYC_ETH_LMT);
         }
 
         // Get ether to token conversion
+        // BK Ok
         uint tokens = ethToTokens(msg.value);
         
         // transfer tokens from fund wallet
+        // BK Ok
         xfer(fundWallet, _addr, tokens);
         
         // Update holder payments
+        // BK Ok
         etherContributed[_addr] = etherContributed[_addr].add(msg.value);
         
         // Update funds raised
+        // BK Ok
         etherRaised = etherRaised.add(msg.value);
         
         // Bail if this pushes the fund over the USD cap or Token cap
+        // BK Ok
         require(etherRaised <= MAX_ETH_FUND);
 
+        // BK Ok
         return true;
     }
     
     // Owner can KYC (or revoke) addresses until close of funding
+    // BK Ok - Only owner can set the Yes/No KYC status for addresses at any time during the crowdsale
     function addKycAddress(address _addr, bool _kyc)
         public
         noReentry
         onlyOwner
         returns (bool)
     {
+        // BK Ok
         require(!fundFailed());
 
+        // BK Ok
         kycAddresses[_addr] = _kyc;
+        // BK Ok - Log event
         KYCAddress(_addr, _kyc);
+        // BK Ok
         return true;
     }
     
     // Owner can sweep a successful funding to the fundWallet
     // Contract can be aborted up until this action.
+    // BK Ok - Only the owner can call this if funding is successful
     function finaliseICO()
         public
         onlyOwner
         preventReentry()
         returns (bool)
     {
+        // BK Ok
         require(fundSucceeded());
 
+        // BK Ok
         icoSuccessful = true;
 
+        // BK Ok - Log event
         FundsTransferred(fundWallet, this.balance);
+        // BK Ok
         fundWallet.transfer(this.balance);
+        // BK Ok
         return true;
     }
     
     // Refunds can be claimed from a failed ICO
+    // BK Ok - Anyone can call this function and the refunds for the specified address will be processed
     function refund(address _addr)
         public
         preventReentry()
         returns (bool)
     {
+        // BK Ok
         require(fundFailed());
         
+        // BK Ok
         uint value = etherContributed[_addr];
 
         // Transfer tokens back to origin
         // (Not really necessary but looking for graceful exit)
+        // BK Ok
         xfer(_addr, fundWallet, balances[_addr]);
 
         // garbage collect
+        // BK Ok
         delete etherContributed[_addr];
+        // BK Ok
         delete kycAddresses[_addr];
         
+        // BK Ok - Log event
         Refunded(_addr, value);
+        // BK Ok
         if (value > 0) {
+            // BK Ok
             _addr.transfer(value);
         }
         return true;
@@ -661,44 +770,60 @@ contract VentanaToken is
 // ERC20 overloaded functions
 //
 
+    // BK Ok
     function transfer(address _to, uint _amount)
         public
         preventReentry
         returns (bool)
     {
         // ICO must be successful
+        // BK Ok - Can only execute after `finaliseICO()` is called
         require(icoSuccessful);
+        // BK Ok
         super.transfer(_to, _amount);
 
+        // BK Ok
         if (_to == veredictum)
             // Notify the Veredictum contract it has been sent tokens
+            // BK Ok
             require(Notify(veredictum).notify(msg.sender, _amount));
+        // BK Ok
         return true;
     }
 
+    // BK Ok
     function transferFrom(address _from, address _to, uint _amount)
         public
         preventReentry
         returns (bool)
     {
         // ICO must be successful
+        // BK Ok - Can only execute after `finaliseICO()` is called
         require(icoSuccessful);
+        // BK Ok
         super.transferFrom(_from, _to, _amount);
 
+        // BK Ok
         if (_to == veredictum)
             // Notify the Veredictum contract it has been sent tokens
+            // BK Ok
             require(Notify(veredictum).notify(msg.sender, _amount));
+        // BK Ok
         return true;
     }
     
+    // BK Ok
     function approve(address _spender, uint _amount)
         public
         noReentry
         returns (bool)
     {
         // ICO must be successful
+        // BK Ok - Can only execute after `finaliseICO()` is called
         require(icoSuccessful);
+        // BK Ok
         super.approve(_spender, _amount);
+        // BK Ok
         return true;
     }
 
@@ -707,83 +832,113 @@ contract VentanaToken is
 //
 
     // To initiate an ownership change
+    // BK Ok - Only owner change change to a new owner
     function changeOwner(address _newOwner)
         public
         noReentry
         onlyOwner
         returns (bool)
     {
+        // BK OK
         ChangeOwnerTo(_newOwner);
+        // BK Ok
         newOwner = _newOwner;
+        // BK Ok
         return true;
     }
 
     // To accept ownership. Required to prove new address can call the contract.
+    // BK Ok - Only new owner can execute this function
     function acceptOwnership()
         public
         noReentry
         returns (bool)
     {
+        // BK Ok
         require(msg.sender == newOwner);
+        // BK Ok
         ChangedOwner(owner, newOwner);
+        // BK Ok
         owner = newOwner;
+        // BK OK
         return true;
     }
 
     // Change the address of the Veredictum contract address. The contract
     // must impliment the `Notify` interface.
+    // BK Ok - Only the owner can set the veredictum contract address
     function changeVeredictum(address _addr)
         public
         noReentry
         onlyOwner
         returns (bool)
     {
+        // BK Ok
         veredictum = _addr;
+        // BK Ok
         return true;
     }
     
     // The contract can be selfdestructed after abort and ether balance is 0.
+    // BK NOTE - The owner can only disable the token contract if `abort()` is called and all refunds are extracted
+    // BK Ok - Only owner can abort
     function destroy()
         public
         noReentry
         onlyOwner
     {
+        // BK Ok - Cannot destroy unless aborted
         require(!__abortFuse);
+        // BK Ok
         require(this.balance == 0);
+        // BK Ok
         selfdestruct(owner);
     }
     
     // Owner can salvage ERC20 tokens that may have been sent to the account
+    // BK Ok - Only owner can execute
     function transferAnyERC20Token(address tokenAddress, uint amount)
         public
         onlyOwner
         preventReentry
         returns (bool) 
     {
+        // BK Ok
         require(ERC20Token(tokenAddress).transfer(owner, amount));
+        // BK Ok
         return true;
     }
 }
 
 
+// BK Ok
 interface Notify
 {
+    // BK Ok
     event Notified(address indexed _from, uint indexed _amount);
     
+    // BK Ok
     function notify(address _from, uint _amount) public returns (bool);
 }
 
 
+// BK Ok
 contract VeredictumTest is Notify
 {
+    // BK Ok
     address public vnt;
     
+    // BK Ok
     function setVnt(address _addr) { vnt = _addr; }
     
+    // BK Ok
     function notify(address _from, uint _amount) public returns (bool)
     {
+        // BK Ok
         require(msg.sender == vnt);
+        // BK Ok
         Notified(_from, _amount);
+        // BK Ok
         return true;
     }
 }

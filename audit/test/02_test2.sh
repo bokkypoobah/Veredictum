@@ -19,8 +19,8 @@ TOKENJS=`grep ^TOKENJS= settings.txt | sed "s/^.*=//"`
 DEPLOYMENTDATA=`grep ^DEPLOYMENTDATA= settings.txt | sed "s/^.*=//"`
 
 INCLUDEJS=`grep ^INCLUDEJS= settings.txt | sed "s/^.*=//"`
-TEST1OUTPUT=`grep ^TEST1OUTPUT= settings.txt | sed "s/^.*=//"`
-TEST1RESULTS=`grep ^TEST1RESULTS= settings.txt | sed "s/^.*=//"`
+TEST2OUTPUT=`grep ^TEST2OUTPUT= settings.txt | sed "s/^.*=//"`
+TEST2RESULTS=`grep ^TEST2RESULTS= settings.txt | sed "s/^.*=//"`
 
 CURRENTTIME=`date +%s`
 CURRENTTIMES=`date -r $CURRENTTIME -u`
@@ -38,20 +38,20 @@ STARTTIME_S=`date -r $STARTTIME -u`
 ENDTIME=`echo "$CURRENTTIME+60*4" | bc`
 ENDTIME_S=`date -r $ENDTIME -u`
 
-printf "MODE            = '$MODE'\n" | tee $TEST1OUTPUT
-printf "GETHATTACHPOINT = '$GETHATTACHPOINT'\n" | tee -a $TEST1OUTPUT
-printf "PASSWORD        = '$PASSWORD'\n" | tee -a $TEST1OUTPUT
-printf "CONTRACTSDIR    = '$CONTRACTSDIR'\n" | tee -a $TEST1OUTPUT
-printf "TOKENSOL        = '$TOKENSOL'\n" | tee -a $TEST1OUTPUT
-printf "TOKENTEMPSOL    = '$TOKENTEMPSOL'\n" | tee -a $TEST1OUTPUT
-printf "TOKENJS         = '$TOKENJS'\n" | tee -a $TEST1OUTPUT
-printf "DEPLOYMENTDATA  = '$DEPLOYMENTDATA'\n" | tee -a $TEST1OUTPUT
-printf "INCLUDEJS       = '$INCLUDEJS'\n" | tee -a $TEST1OUTPUT
-printf "TEST1OUTPUT     = '$TEST1OUTPUT'\n" | tee -a $TEST1OUTPUT
-printf "TEST1RESULTS    = '$TEST1RESULTS'\n" | tee -a $TEST1OUTPUT
-printf "CURRENTTIME     = '$CURRENTTIME' '$CURRENTTIMES'\n" | tee -a $TEST1OUTPUT
-printf "STARTTIME       = '$STARTTIME' '$STARTTIME_S'\n" | tee -a $TEST1OUTPUT
-printf "ENDTIME         = '$ENDTIME' '$ENDTIME_S'\n" | tee -a $TEST1OUTPUT
+printf "MODE            = '$MODE'\n" | tee $TEST2OUTPUT
+printf "GETHATTACHPOINT = '$GETHATTACHPOINT'\n" | tee -a $TEST2OUTPUT
+printf "PASSWORD        = '$PASSWORD'\n" | tee -a $TEST2OUTPUT
+printf "CONTRACTSDIR    = '$CONTRACTSDIR'\n" | tee -a $TEST2OUTPUT
+printf "TOKENSOL        = '$TOKENSOL'\n" | tee -a $TEST2OUTPUT
+printf "TOKENTEMPSOL    = '$TOKENTEMPSOL'\n" | tee -a $TEST2OUTPUT
+printf "TOKENJS         = '$TOKENJS'\n" | tee -a $TEST2OUTPUT
+printf "DEPLOYMENTDATA  = '$DEPLOYMENTDATA'\n" | tee -a $TEST2OUTPUT
+printf "INCLUDEJS       = '$INCLUDEJS'\n" | tee -a $TEST2OUTPUT
+printf "TEST2OUTPUT     = '$TEST2OUTPUT'\n" | tee -a $TEST2OUTPUT
+printf "TEST2RESULTS    = '$TEST2RESULTS'\n" | tee -a $TEST2OUTPUT
+printf "CURRENTTIME     = '$CURRENTTIME' '$CURRENTTIMES'\n" | tee -a $TEST2OUTPUT
+printf "STARTTIME       = '$STARTTIME' '$STARTTIME_S'\n" | tee -a $TEST2OUTPUT
+printf "ENDTIME         = '$ENDTIME' '$ENDTIME_S'\n" | tee -a $TEST2OUTPUT
 
 # Make copy of SOL file and modify start and end times ---
 `cp $CONTRACTSDIR/$TOKENSOL $TOKENTEMPSOL`
@@ -68,7 +68,7 @@ echo "$DIFFS1"
 
 echo "var tokenOutput=`solc --optimize --combined-json abi,bin,interface $TOKENTEMPSOL`;" > $TOKENJS
 
-geth --verbosity 3 attach $GETHATTACHPOINT << EOF | tee -a $TEST1OUTPUT
+geth --verbosity 3 attach $GETHATTACHPOINT << EOF | tee -a $TEST2OUTPUT
 loadScript("$TOKENJS");
 loadScript("functions.js");
 
@@ -188,60 +188,41 @@ console.log("RESULT: ");
 
 
 // -----------------------------------------------------------------------------
-var finaliseMessage = "Finalise Crowdsale";
+var abortMessage = "Abort Crowdsale";
 // -----------------------------------------------------------------------------
-console.log("RESULT: " + finaliseMessage);
-var finaliseTx = token.finaliseICO({from: contractOwnerAccount, to: tokenAddress, gas: 400000});
+console.log("RESULT: " + abortMessage);
+var abortTx = token.abort({from: contractOwnerAccount, gas: 400000});
 while (txpool.status.pending > 0) {
 }
-printTxData("finaliseTx", finaliseTx);
+printTxData("abortTx", abortTx);
 printBalances();
-failIfGasEqualsGasUsed(finaliseTx, finaliseMessage);
+failIfGasEqualsGasUsed(abortTx, abortMessage);
 printTokenContractDetails();
 console.log("RESULT: ");
 
 
 // -----------------------------------------------------------------------------
-var canMoveMessage = "Can Move Tokens After Crowdsale Finalised";
+var claimRefundsMessage = "Claim Refunds";
 // -----------------------------------------------------------------------------
-console.log("RESULT: " + canMoveMessage);
-var canMove1Tx = token.transfer(account6, "1000000000000", {from: account4, gas: 100000});
-var canMove2Tx = token.approve(account7,  "30000000000000000", {from: account5, gas: 100000});
+console.log("RESULT: " + claimRefundsMessage);
+var claimRefunds1Tx = token.refund(account3, {from: account3, gas: 100000});
+var claimRefunds2Tx = token.refund(account4, {from: account3, gas: 100000});
+var claimRefunds3Tx = token.refund(account5, {from: account3, gas: 100000});
 while (txpool.status.pending > 0) {
 }
-var canMove3Tx = token.transferFrom(account5, account8, "30000000000000000", {from: account7, gas: 100000});
-while (txpool.status.pending > 0) {
-}
-printTxData("canMove1Tx", canMove1Tx);
-printTxData("canMove2Tx", canMove2Tx);
-printTxData("canMove3Tx", canMove3Tx);
+printTxData("claimRefunds1Tx", claimRefunds1Tx);
+printTxData("claimRefunds2Tx", claimRefunds2Tx);
+printTxData("claimRefunds3Tx", claimRefunds3Tx);
 printBalances();
-failIfGasEqualsGasUsed(canMove1Tx, canMoveMessage + " - transfer 0.000001 VNT ac4 -> ac6. CHECK for movement");
-failIfGasEqualsGasUsed(canMove2Tx, canMoveMessage + " - approve 0.03 VNT ac5 -> ac7");
-failIfGasEqualsGasUsed(canMove3Tx, canMoveMessage + " - transferFrom 0.03 VNT ac5 -> ac8. CHECK for movement");
-printTokenContractDetails();
-console.log("RESULT: ");
-
-
-// -----------------------------------------------------------------------------
-var invalidContribution1Message = "Send Invalid Contribution";
-// -----------------------------------------------------------------------------
-console.log("RESULT: " + invalidContribution1Message);
-var sendInvalidContribution1Tx = eth.sendTransaction({from: account3, to: tokenAddress, gas: 400000, value: web3.toWei("2000.123333333333333333", "ether")});
-var sendInvalidContribution2Tx = eth.sendTransaction({from: account6, to: tokenAddress, gas: 400000, value: web3.toWei("10.123456789012345678", "ether")});
-while (txpool.status.pending > 0) {
-}
-printTxData("sendInvalidContribution1Tx", sendInvalidContribution1Tx);
-printTxData("sendInvalidContribution2Tx", sendInvalidContribution2Tx);
-printBalances();
-passIfGasEqualsGasUsed(sendInvalidContribution1Tx, invalidContribution1Message + " 2000.x ETH from ac3 (KYC-ed)");
-passIfGasEqualsGasUsed(sendInvalidContribution2Tx, invalidContribution1Message + " 10.x ETH from ac6 (non-KYC-ed)");
+failIfGasEqualsGasUsed(claimRefunds1Tx, claimRefundsMessage + " - ac3 claiming refunds for ac3");
+failIfGasEqualsGasUsed(claimRefunds2Tx, claimRefundsMessage + " - ac3 claiming refunds for ac4");
+failIfGasEqualsGasUsed(claimRefunds3Tx, claimRefundsMessage + " - ac3 claiming refunds for ac5");
 printTokenContractDetails();
 console.log("RESULT: ");
 
 
 EOF
-grep "DATA: " $TEST1OUTPUT | sed "s/DATA: //" > $DEPLOYMENTDATA
+grep "DATA: " $TEST2OUTPUT | sed "s/DATA: //" > $DEPLOYMENTDATA
 cat $DEPLOYMENTDATA
-grep "RESULT: " $TEST1OUTPUT | sed "s/RESULT: //" > $TEST1RESULTS
-cat $TEST1RESULTS
+grep "RESULT: " $TEST2OUTPUT | sed "s/RESULT: //" > $TEST2RESULTS
+cat $TEST2RESULTS

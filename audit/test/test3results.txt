@@ -1,0 +1,279 @@
+ # Account                                             EtherBalanceChange                          Token Name
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+ 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       25.000000000000000000           0.000000000000000000 Account #0 - Miner
+ 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433        0.000000000000000000           0.000000000000000000 Account #1 - Contract Owner
+ 2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000 Account #2 - Multisig
+ 3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 Account #3 - KYCed #1
+ 4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 Account #4 - KYCed #2
+ 5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.000000000000000000 Account #5
+ 6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.000000000000000000 Account #6
+ 7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.000000000000000000 Account #7
+ 8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.000000000000000000 Account #8
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+                                                                                    0.000000000000000000 Total Token Balances
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+
+
+Deploy Token Contract
+tokenAddress=0xb3c7d39fdd2e7dcd02b660b1a317ae06c7c915cc
+token.symbol()=VNT
+tokenAddress=0xb3c7d39fdd2e7dcd02b660b1a317ae06c7c915cc gas=6000000 gasUsed=2112836 costETH=0.038031048 costUSD=14.46663034872 @ ETH/USD=380.39 gasPrice=18000000000 block=454 txId=0x22d1d255ea9469c1f52b035f59f3946b74b01e740398f0b66fafd6b85ab57e23
+ # Account                                             EtherBalanceChange                          Token Name
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+ 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       35.038031048000000000           0.000000000000000000 Account #0 - Miner
+ 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.038031048000000000           0.000000000000000000 Account #1 - Contract Owner
+ 2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000   300000000.000000000000000000 Account #2 - Multisig
+ 3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 Account #3 - KYCed #1
+ 4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 Account #4 - KYCed #2
+ 5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.000000000000000000 Account #5
+ 6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.000000000000000000 Account #6
+ 7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.000000000000000000 Account #7
+ 8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.000000000000000000 Account #8
+ 9 0xb3c7d39fdd2e7dcd02b660b1a317ae06c7c915cc        0.000000000000000000           0.000000000000000000 Token 'VNT'
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+                                                                            300000000.000000000000000000 Total Token Balances
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+
+PASS Deploy Token Contract
+tokenContractAddress=0xb3c7d39fdd2e7dcd02b660b1a317ae06c7c915cc
+token.symbol=VNT
+token.name=Ventana
+token.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
+token.newOwner=0x0000000000000000000000000000000000000000
+token.fundWallet=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
+token.TOKENS_PER_USD=3
+token.TOKENS_PER_ETH=810
+token.USD_PER_ETH=270
+token.MIN_USD_FUND=2000000
+token.MIN_ETH_FUND=7407.407407407407407407
+token.MAX_USD_FUND=20000000
+token.MAX_ETH_FUND=74074.074074074074074074
+token.KYC_USD_LMT=10000
+token.KYC_ETH_LMT=37.037037037037037037
+token.MAX_TOKENS=300000000
+token.FUNDING_PERIOD=2419200
+token.totalSupply=300000000
+token.__abortFuse=true
+token.icoSuccessful=false
+token.veredictum=0x0000000000000000000000000000000000000000
+token.etherRaised=0
+token.START_DATE=1502292725 Wed, 09 Aug 2017 15:32:05 UTC
+token.END_DATE=1502292890 Wed, 09 Aug 2017 15:34:50 UTC
+token.fundFailed=false
+token.fundSucceeded=false
+Transfer 0 #454: _from=0x0000000000000000000000000000000000000000 _to=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976 _amount=300000000
+
+Add KYC Accounts
+addKycAccounts1Tx gas=400000 gasUsed=45500 costETH=0.000819 costUSD=0.31153941 @ ETH/USD=380.39 gasPrice=18000000000 block=456 txId=0x48f059d24a7c2e5725a34d96d8e4a78dcc600acf24ec9aa5ab4c56a0c9909cc1
+addKycAccounts2Tx gas=400000 gasUsed=45500 costETH=0.000819 costUSD=0.31153941 @ ETH/USD=380.39 gasPrice=18000000000 block=456 txId=0x5b54fb95a4840a30a4dca6f0f42c94204cf370b3a986937f649d520635c845b8
+ # Account                                             EtherBalanceChange                          Token Name
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+ 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       45.039669048000000000           0.000000000000000000 Account #0 - Miner
+ 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.039669048000000000           0.000000000000000000 Account #1 - Contract Owner
+ 2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000   300000000.000000000000000000 Account #2 - Multisig
+ 3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 Account #3 - KYCed #1
+ 4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 Account #4 - KYCed #2
+ 5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.000000000000000000 Account #5
+ 6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.000000000000000000 Account #6
+ 7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.000000000000000000 Account #7
+ 8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.000000000000000000 Account #8
+ 9 0xb3c7d39fdd2e7dcd02b660b1a317ae06c7c915cc        0.000000000000000000           0.000000000000000000 Token 'VNT'
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+                                                                            300000000.000000000000000000 Total Token Balances
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+
+PASS Add KYC Accounts ac3 true
+PASS Add KYC Accounts ac4 true
+tokenContractAddress=0xb3c7d39fdd2e7dcd02b660b1a317ae06c7c915cc
+token.symbol=VNT
+token.name=Ventana
+token.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
+token.newOwner=0x0000000000000000000000000000000000000000
+token.fundWallet=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
+token.TOKENS_PER_USD=3
+token.TOKENS_PER_ETH=810
+token.USD_PER_ETH=270
+token.MIN_USD_FUND=2000000
+token.MIN_ETH_FUND=7407.407407407407407407
+token.MAX_USD_FUND=20000000
+token.MAX_ETH_FUND=74074.074074074074074074
+token.KYC_USD_LMT=10000
+token.KYC_ETH_LMT=37.037037037037037037
+token.MAX_TOKENS=300000000
+token.FUNDING_PERIOD=2419200
+token.totalSupply=300000000
+token.__abortFuse=true
+token.icoSuccessful=false
+token.veredictum=0x0000000000000000000000000000000000000000
+token.etherRaised=0
+token.START_DATE=1502292725 Wed, 09 Aug 2017 15:32:05 UTC
+token.END_DATE=1502292890 Wed, 09 Aug 2017 15:34:50 UTC
+token.fundFailed=false
+token.fundSucceeded=false
+KYCAddress 0 #456 _addr=0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0 _kyc=true
+KYCAddress 1 #456 _addr=0xa44a08d3f6933c69212114bb66e2df1813651844 _kyc=true
+
+Send Contributions Before Start
+contributionsBeforeStart1Tx gas=400000 gasUsed=91179 costETH=0.001641222 costUSD=0.62430443658 @ ETH/USD=380.39 gasPrice=18000000000 block=459 txId=0x43d5b8909524ee1b5128c27cfecb5ee61f69ce358df6ea7ca876aeb23fee8837
+contributionsBeforeStart2Tx gas=400000 gasUsed=400000 costETH=0.0072 costUSD=2.738808 @ ETH/USD=380.39 gasPrice=18000000000 block=459 txId=0x64549030e3c5bf6a417ba1ba219c63bfc2c9f133a6ecfdd6562a0e9b4f2f2448
+ # Account                                             EtherBalanceChange                          Token Name
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+ 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       60.048510270000000000           0.000000000000000000 Account #0 - Miner
+ 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.039669048000000000           0.000000000000000000 Account #1 - Contract Owner
+ 2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000   299991900.000000000000000000 Account #2 - Multisig
+ 3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 Account #3 - KYCed #1
+ 4 0xa44a08d3f6933c69212114bb66e2df1813651844      -10.001641222000000000        8100.000000000000000000 Account #4 - KYCed #2
+ 5 0xa55a151eb00fded1634d27d1127b4be4627079ea       -0.007200000000000000           0.000000000000000000 Account #5
+ 6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.000000000000000000 Account #6
+ 7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.000000000000000000 Account #7
+ 8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.000000000000000000 Account #8
+ 9 0xb3c7d39fdd2e7dcd02b660b1a317ae06c7c915cc       10.000000000000000000           0.000000000000000000 Token 'VNT'
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+                                                                            300000000.000000000000000000 Total Token Balances
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+
+PASS Send Contributions Before Start 10 ETH from ac4 (KYC-ed)
+PASS Send Contributions Before Start 20 ETH from ac5 (non-KYCe-ed) fail
+tokenContractAddress=0xb3c7d39fdd2e7dcd02b660b1a317ae06c7c915cc
+token.symbol=VNT
+token.name=Ventana
+token.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
+token.newOwner=0x0000000000000000000000000000000000000000
+token.fundWallet=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
+token.TOKENS_PER_USD=3
+token.TOKENS_PER_ETH=810
+token.USD_PER_ETH=270
+token.MIN_USD_FUND=2000000
+token.MIN_ETH_FUND=7407.407407407407407407
+token.MAX_USD_FUND=20000000
+token.MAX_ETH_FUND=74074.074074074074074074
+token.KYC_USD_LMT=10000
+token.KYC_ETH_LMT=37.037037037037037037
+token.MAX_TOKENS=300000000
+token.FUNDING_PERIOD=2419200
+token.totalSupply=300000000
+token.__abortFuse=true
+token.icoSuccessful=false
+token.veredictum=0x0000000000000000000000000000000000000000
+token.etherRaised=10
+token.START_DATE=1502292725 Wed, 09 Aug 2017 15:32:05 UTC
+token.END_DATE=1502292890 Wed, 09 Aug 2017 15:34:50 UTC
+token.fundFailed=false
+token.fundSucceeded=false
+Transfer 0 #459: _from=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976 _to=0xa44a08d3f6933c69212114bb66e2df1813651844 _amount=8100
+
+Waiting until startTime at 1502292725 Thu, 10 Aug 2017 01:32:05 AEST currentDate=Thu, 10 Aug 2017 01:32:06 AEST
+Waited until startTime at 1502292725 Thu, 10 Aug 2017 01:32:05 AEST currentDate=Thu, 10 Aug 2017 01:32:06 AEST
+
+Send Valid Contribution
+sendValidContribution1Tx gas=400000 gasUsed=76132 costETH=0.001370376 costUSD=0.52127732664 @ ETH/USD=380.39 gasPrice=18000000000 block=461 txId=0x362ec398c85798a53d013dd87e4a2dff0673b503d3b26a7b66c63186d17cad0d
+sendValidContribution2Tx gas=400000 gasUsed=46132 costETH=0.000830376 costUSD=0.31586672664 @ ETH/USD=380.39 gasPrice=18000000000 block=461 txId=0x87c7b12cac6fb15040d85af9cf2b5ee91287c58b47fe707292d0584202a66d37
+sendValidContribution3Tx gas=400000 gasUsed=76482 costETH=0.001376676 costUSD=0.52367378364 @ ETH/USD=380.39 gasPrice=18000000000 block=461 txId=0x769e5d0760e5f24f16256f4cd53edc701024e80121c7e83a641acac4dfdf32cf
+ # Account                                             EtherBalanceChange                          Token Name
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+ 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       70.052087698000000000           0.000000000000000000 Account #0 - Miner
+ 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.039669048000000000           0.000000000000000000 Account #1 - Contract Owner
+ 2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000   299876461.220000900000001513 Account #2 - Multisig
+ 3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0      -50.124703709333333333       44659.889999999999999703 Account #3 - KYCed #1
+ 4 0xa44a08d3f6933c69212114bb66e2df1813651844      -80.236916042444444444       70678.889999999999999604 Account #4 - KYCed #2
+ 5 0xa55a151eb00fded1634d27d1127b4be4627079ea      -10.132033465012345678        8199.999999099999999180 Account #5
+ 6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.000000000000000000 Account #6
+ 7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.000000000000000000 Account #7
+ 8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.000000000000000000 Account #8
+ 9 0xb3c7d39fdd2e7dcd02b660b1a317ae06c7c915cc      140.481234566790123455           0.000000000000000000 Token 'VNT'
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+                                                                            300000000.000000000000000000 Total Token Balances
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+
+PASS Send Valid Contribution 50.x ETH from ac3 (KYC-ed)
+PASS Send Valid Contribution 70.x ETH from ac4 (KYC-ed)
+PASS Send Valid Contribution 10.x ETH from ac5 (non-KYC-ed)
+tokenContractAddress=0xb3c7d39fdd2e7dcd02b660b1a317ae06c7c915cc
+token.symbol=VNT
+token.name=Ventana
+token.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
+token.newOwner=0x0000000000000000000000000000000000000000
+token.fundWallet=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
+token.TOKENS_PER_USD=3
+token.TOKENS_PER_ETH=810
+token.USD_PER_ETH=270
+token.MIN_USD_FUND=2000000
+token.MIN_ETH_FUND=7407.407407407407407407
+token.MAX_USD_FUND=20000000
+token.MAX_ETH_FUND=74074.074074074074074074
+token.KYC_USD_LMT=10000
+token.KYC_ETH_LMT=37.037037037037037037
+token.MAX_TOKENS=300000000
+token.FUNDING_PERIOD=2419200
+token.totalSupply=300000000
+token.__abortFuse=true
+token.icoSuccessful=false
+token.veredictum=0x0000000000000000000000000000000000000000
+token.etherRaised=140.481234566790123455
+token.START_DATE=1502292725 Wed, 09 Aug 2017 15:32:05 UTC
+token.END_DATE=1502292890 Wed, 09 Aug 2017 15:34:50 UTC
+token.fundFailed=false
+token.fundSucceeded=false
+Transfer 0 #461: _from=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976 _to=0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0 _amount=44659.889999999999999703
+Transfer 1 #461: _from=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976 _to=0xa55a151eb00fded1634d27d1127b4be4627079ea _amount=8199.99999909999999918
+Transfer 2 #461: _from=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976 _to=0xa44a08d3f6933c69212114bb66e2df1813651844 _amount=62578.889999999999999604
+
+Waiting until endTime at 1502292890 Thu, 10 Aug 2017 01:34:50 AEST currentDate=Thu, 10 Aug 2017 01:32:11 AEST
+Waited until endTime at 1502292890 Thu, 10 Aug 2017 01:34:50 AEST currentDate=Thu, 10 Aug 2017 01:34:50 AEST
+
+Claim Refunds
+claimRefunds1Tx gas=100000 gasUsed=40637 costETH=0.000731466 costUSD=0.27824235174 @ ETH/USD=380.39 gasPrice=18000000000 block=493 txId=0xfa60dcde3170574d28e1b54c3c4135ac564fc5f9c47f80ea64d503fdec87a413
+claimRefunds2Tx gas=100000 gasUsed=40637 costETH=0.000731466 costUSD=0.27824235174 @ ETH/USD=380.39 gasPrice=18000000000 block=493 txId=0xc009cfb8720ed03889280740087e182c7a9479fa6009d67e81fab92f0bb53eec
+claimRefunds3Tx gas=100000 gasUsed=40637 costETH=0.000731466 costUSD=0.27824235174 @ ETH/USD=380.39 gasPrice=18000000000 block=493 txId=0xcffa8378f1fc77ecb55c846cf9c576d6b2b33289bf3d4f72d324ab8bf92435a3
+ # Account                                             EtherBalanceChange                          Token Name
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+ 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e      230.054282096000000000           0.000000000000000000 Account #0 - Miner
+ 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.039669048000000000           0.000000000000000000 Account #1 - Contract Owner
+ 2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000   300000000.000000000000000000 Account #2 - Multisig
+ 3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0       -0.003564774000000000           0.000000000000000000 Account #3 - KYCed #1
+ 4 0xa44a08d3f6933c69212114bb66e2df1813651844       -0.002471598000000000           0.000000000000000000 Account #4 - KYCed #2
+ 5 0xa55a151eb00fded1634d27d1127b4be4627079ea       -0.008576676000000000           0.000000000000000000 Account #5
+ 6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.000000000000000000 Account #6
+ 7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.000000000000000000 Account #7
+ 8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.000000000000000000 Account #8
+ 9 0xb3c7d39fdd2e7dcd02b660b1a317ae06c7c915cc        0.000000000000000000           0.000000000000000000 Token 'VNT'
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+                                                                            300000000.000000000000000000 Total Token Balances
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+
+PASS Claim Refunds - ac3 claiming refunds for ac3
+PASS Claim Refunds - ac3 claiming refunds for ac4
+PASS Claim Refunds - ac3 claiming refunds for ac5
+tokenContractAddress=0xb3c7d39fdd2e7dcd02b660b1a317ae06c7c915cc
+token.symbol=VNT
+token.name=Ventana
+token.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
+token.newOwner=0x0000000000000000000000000000000000000000
+token.fundWallet=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
+token.TOKENS_PER_USD=3
+token.TOKENS_PER_ETH=810
+token.USD_PER_ETH=270
+token.MIN_USD_FUND=2000000
+token.MIN_ETH_FUND=7407.407407407407407407
+token.MAX_USD_FUND=20000000
+token.MAX_ETH_FUND=74074.074074074074074074
+token.KYC_USD_LMT=10000
+token.KYC_ETH_LMT=37.037037037037037037
+token.MAX_TOKENS=300000000
+token.FUNDING_PERIOD=2419200
+token.totalSupply=300000000
+token.__abortFuse=true
+token.icoSuccessful=false
+token.veredictum=0x0000000000000000000000000000000000000000
+token.etherRaised=140.481234566790123455
+token.START_DATE=1502292725 Wed, 09 Aug 2017 15:32:05 UTC
+token.END_DATE=1502292890 Wed, 09 Aug 2017 15:34:50 UTC
+token.fundFailed=true
+token.fundSucceeded=false
+Refunded 0 #493 _addr=0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0 _value=50.123333333333333333
+Refunded 1 #493 _addr=0xa44a08d3f6933c69212114bb66e2df1813651844 _value=80.234444444444444444
+Refunded 2 #493 _addr=0xa55a151eb00fded1634d27d1127b4be4627079ea _value=10.123456789012345678
+Transfer 0 #493: _from=0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0 _to=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976 _amount=44659.889999999999999703
+Transfer 1 #493: _from=0xa44a08d3f6933c69212114bb66e2df1813651844 _to=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976 _amount=70678.889999999999999604
+Transfer 2 #493: _from=0xa55a151eb00fded1634d27d1127b4be4627079ea _to=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976 _amount=8199.99999909999999918
+
