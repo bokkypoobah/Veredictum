@@ -1,7 +1,5 @@
 # Veredictum Crowdsale Contract Audit
 
-Status: Work in progress
-
 ## Summary
 
 Bok Consulting Pty Ltd was commissioned to perform an audit on the crowdsale and token Ethereum smart contract for the upcoming
@@ -18,9 +16,9 @@ No potential vulnerabilities have been identified in the crowdsale and token con
 
 ### Crowdsale Mainnet Address
 
-The *VentanaToken* crowdsale/token contract is deployed at `{TBA}`.
+As listed in [https://tokensale.veredictum.io/](https://tokensale.veredictum.io/), the *VentanaToken* crowdsale/token contract is deployed at [0x30cefbcb5c26a5b19a019092ab8d09f8739c904f](https://etherscan.io/address/0x30cefbcb5c26a5b19a019092ab8d09f8739c904f#code).
 
-The `fundWallet` multisig wallet is deployed at `{TBA}`.
+The `fundWallet` multisig wallet is deployed at [0xd6514387236595e080b97c8ead1cbf12f9a6ab65](https://etherscan.io/address/0xd6514387236595e080b97c8ead1cbf12f9a6ab65).
 
 <br />
 
